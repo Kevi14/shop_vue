@@ -134,8 +134,11 @@ const administration = createStore({
             data["amount"] = item.amount;
             context.commit("updateCartState", data);
             // state.cart.items.push(data)
+            return true
           });
       }
+      else{return false}
+      
     },
     removeFromCart(context, data) {
       // console.log(id.id)

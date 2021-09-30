@@ -109,7 +109,10 @@
 
 <script>
 import axios from "@/axios";
+// import Toast from "vue-toastification";
+// import "vue-toastification/dist/index.css";
 export default {
+
   name: "Shop",
 
   data: function () {
@@ -122,13 +125,6 @@ export default {
   },
   methods: {
     async products() {
-      // console.log("a");
-      // axios.get("http://127.0.0.1:8000/decks/");
-      // let config = {
-      //   // headers: {
-      //   //   Accept: "application/json",
-      //   // },
-      // };
       await axios.get("/decks/").then((response) => {
         // let data = JSON.parse(response.data);
         this.decks = response.data;
@@ -138,8 +134,33 @@ export default {
       this.$store.dispatch("addToCart", {
         id: id,
         amount: 1,
+      }).then((response)=> {
+        console.log(response
+        )
+                if(response == false){
+this.$toast.show(`Product already in cart`,{
+  type:"success",
+  position:"top",
+  duration:4000,
+  useDefaultCss:false,
+  class:"bg-red-500 border-red-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
+  
+});
+                }
+                else {
+                  this.$toast.show(`Product added to cart`,{
+  type:"success",
+  position:"top",
+  duration:4000,
+  useDefaultCss:false,
+  class:"bg-green-500 border-green-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
+  
+});
+
+                }
       });
       this.cart = this.$store.getters.cartLength;
+
     },
     goToProduct(id) {
       this.$router.push({ path: `/product/${id}/` });
@@ -150,3 +171,52 @@ export default {
   },
 };
 </script>
+<style scoped>
+#c-toast-container{
+  background-color: blue;
+}
+@keyframes ping {
+  75%, 100% {
+    transform: scale();
+    opacity: 0;
+  }
+}
+@keyframes anime {
+      0% {
+        width: 60px;
+        height: 60px;
+        background: #f0f0f0;
+        box-shadow:  0 0 0 #cccccc,
+                     0 0 0 #ffffff,
+                      10px 10px 10px #cccccc inset,
+                      -10px -10px 10px #ffffff inset;
+      }
+      25% {
+        width: 60px;
+        height: 60px;
+        background: #f8f8f8;
+        box-shadow:  10px 10px 10px #cccccc,
+                     10px 10px 10px #ffffff,
+                     0 0 0 #cccccc inset,
+                     0 0 0 #ffffff inset;
+      }
+      50% {
+        width: 60px;
+        height: 240px;
+        background: #f8f8f8;
+        box-shadow:  10px 10px 10px #cccccc,
+                     10px 10px 10px #ffffff,
+                     0 0 0 #cccccc inset,
+                     0 0 0 #ffffff inset;
+      }
+      100% {
+        width: 480px;
+        height: 240px;
+        background: #fafafa;
+        box-shadow:  40px 40px 40px #cccccc,
+                     0 0 0 #ffffff,
+                     0 0 0 #cccccc inset,
+                     2px 2px 2px #ffffff inset;
+      }
+}
+</style>

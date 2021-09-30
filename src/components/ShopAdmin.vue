@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gradient-to-tr from-red-300 to-yellow-200">
+  <div class="">
     <div
       v-if="this.$store.state.isLoading"
       class="pt-20 flex justify-center items-center"
@@ -219,28 +219,22 @@ export default {
       this.$router.push({ path: `/product/${id}/` });
     },
     showDeleteModalfunction(id) {
-      // console.log(id)
       this.showDeleteModal = !this.showDeleteModal;
       this.idToChange = id;
       //
     },
     hideEditModalfunction() {
-      // console.log(id)
       this.showEditModal = !this.showEditModal;
       this.idToChange = null;
       //
     },
     showEditModalfunction(id) {
-      // console.log(id)
       this.showEditModal = !this.showEditModal;
       this.idToChange = id;
       //
     },
     toggleAddModalfunction() {
-      // console.log(id)
       this.showAddModal = !this.showAddModal;
-
-      //
     },
 
     hideDeleteModalfunction() {

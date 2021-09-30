@@ -197,7 +197,7 @@ export default {
 
   methods: {
 async searchForProduct(){
-    await axios.get(`http://localhost:8000/items_ordered/?order_id=${this.search.replace(/\s+/g, '')}`).then((response)=>{
+    await axios.get(`/items_ordered/?order_id=${this.search.replace(/\s+/g, '')}`).then((response)=>{
         console.log(response.data);
         if (response.data.length !==0){
             this.exists=true

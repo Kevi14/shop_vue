@@ -131,7 +131,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from "@/axios";
 /* eslint-disable */
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";

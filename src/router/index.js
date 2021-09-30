@@ -66,6 +66,9 @@ const routes = [
     path: "/admin_order/",
     name: "adminOrder",
     component: AdminOrders,
+    meta: {
+      requiresLogin: true,
+    },
   },
 ];
 

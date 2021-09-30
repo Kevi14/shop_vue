@@ -109,7 +109,6 @@
 
 <script>
 import axios from "axios";
-// axios.defaults.baseURL = 'http://localhost:8000/';
 export default {
   name: "Shop",
 
@@ -130,14 +129,11 @@ export default {
       //   //   Accept: "application/json",
       //   // },
       // };
-      await axios.get("http://127.0.0.1:8000/decks/").then((response) => {
+      await axios.get("/decks/").then((response) => {
         // let data = JSON.parse(response.data);
         this.decks = response.data;
       });
     },
-    // removeProducts(product) {
-    //     axios.delete("http://127.0.0.1:8000/decks/"+product+"/");
-    //   },
     addToCart(id) {
       this.$store.dispatch("addToCart", {
         id: id,

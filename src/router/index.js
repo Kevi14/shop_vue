@@ -7,8 +7,7 @@ import CheckoutPage from "../views/CheckoutPage.vue";
 import Billing from "../views/Billing.vue";
 import PaymentSuccessful from "../views/PaymentSuccessful.vue";
 import Order from "../views/Order.vue";
-import AdminOrders from "../views/AdminOrders.vue";
-
+import NotFound from "../views/NotFound.vue"
 const routes = [
   {
     path: "/",
@@ -63,12 +62,9 @@ const routes = [
     component: Order,
   },
   {
-    path: "/admin_order/",
-    name: "adminOrder",
-    component: AdminOrders,
-    meta: {
-      requiresLogin: true,
-    },
+    path: "/:pathMatch(.*)*",
+    name: "404",
+    component: NotFound,
   },
 ];
 

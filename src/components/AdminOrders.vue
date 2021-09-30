@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col pt-32">
+  <div class="flex flex-col pt-32 ">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div
@@ -159,7 +159,7 @@
 import axios from "@/axios";
 export default {
   /* eslint-disable */
-  name: "CheckoutPage",
+  name: "AdminOrders",
   data: function () {
     return {
       search: null,

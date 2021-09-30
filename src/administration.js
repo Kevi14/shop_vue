@@ -7,7 +7,7 @@ import createPersistedState from "vuex-persistedstate";
 // import Vue from 'vue'
 // import Vuex from 'vuex'
 // import { getAPI } from './axios-api'
-import axios from "axios";
+import axios from "@/axios";
 
 // Vue.use(Vuex)
 const administration = createStore({
@@ -75,6 +75,7 @@ const administration = createStore({
     },
   },
   actions: {
+    
     userLogout(context) {
       if (context.getters.loggedIn) {
         context.commit("destroyToken");

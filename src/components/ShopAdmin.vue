@@ -176,7 +176,7 @@
 
 
 <script>
-import axios from "axios";
+import axios from "@/axios";
 import DeleteProductModal from "@/components/DeleteProductModal.vue";
 import EditProductModal from "@/components/EditProductModal.vue";
 import AddProductModal from "@/components/AddProductModal.vue";

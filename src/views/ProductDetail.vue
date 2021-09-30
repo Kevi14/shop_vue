@@ -293,7 +293,7 @@
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
 // import Shop from "@/components/Shop.vue";
-import axios from "axios";
+import axios from "@/axios";
 export default {
   name: "ProductDetail",
   //   components: {

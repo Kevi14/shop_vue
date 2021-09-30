@@ -100,11 +100,6 @@ const administration = createStore({
       });
     },
     refreshToken(context) {
-      console.log("access")
-
-      console.log(context.state.accessToken)
-      console.log("refresh")
-      console.log(context.state.refreshToken)
       return new Promise((resolve, reject) => {
         axios
           .post("/api-token-refresh/", {
@@ -113,7 +108,6 @@ const administration = createStore({
             // password: usercredentials.password,
           })
           .then((response) => {
-            console.log(response.data.access)
             context.commit("updateStorage", {
               access: response.data.access,
               refresh: response.data.refresh,
@@ -128,9 +122,6 @@ const administration = createStore({
       });
     },
     addToCart(context, item) {
-      // console.log(item)
-      // console.log(item)
-      // console.log("A")
       const exists = context.getters.getCartg.items.filter(
         (i) => i.id === item.id
       );
@@ -195,7 +186,7 @@ const administration = createStore({
       };
       console.log(data.form);
 
-      axios.patch(`http://127.0.0.1:8000/decks/${data.id}/`, data.form, config);
+      axios.patch(`/decks/${data.id}/`, data.form, config);
     },
 
     async addProduct(context, data) {

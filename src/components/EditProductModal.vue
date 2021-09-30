@@ -409,7 +409,7 @@ export default {
 
   mounted() {
     axios
-      .get(`http://127.0.0.1:8000/decks/${this.idToChange}/`)
+      .get(`/decks/${this.idToChange}/`)
       .then((response) => {
         let data = response.data;
         this.title = data.title;
@@ -418,7 +418,7 @@ export default {
         this.primaryPhotoUrl = data.get_image;
       });
     axios
-      .get(`http://127.0.0.1:8000/images/?product_id=${this.idToChange}`)
+      .get(`/images/?product_id=${this.idToChange}`)
       .then((response) => {
         response.data.forEach((element, index) => {
           this.imageArrayUrl[index] = element.get_image;

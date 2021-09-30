@@ -437,7 +437,7 @@ export default {
           "Content-Type": "multipart/form-data",
         },
       };
-      axios.post(`http://127.0.0.1:8000/images/`, formData, config);
+      axios.post(`/images/`, formData, config);
     },
     async addProduct() {
       const formData = new FormData();
@@ -457,7 +457,7 @@ export default {
       };
 
       axios
-        .post(`http://127.0.0.1:8000/decks/`, formData, config)
+        .post(`/decks/`, formData, config)
         .then((response) => {
           this.addImages(response.data.id);
         });

@@ -83,7 +83,7 @@ const administration = createStore({
     userLogin(context, usercredentials) {
       return new Promise((resolve, reject) => {
         axios
-          .post("http://127.0.0.1:8000/api-token/", {
+          .post("/api-token/", {
             username: usercredentials.username,
             password: usercredentials.password,
           })
@@ -100,12 +100,14 @@ const administration = createStore({
       });
     },
     refreshToken(context) {
-      console.log("para")
+      console.log("access")
+
       console.log(context.state.accessToken)
+      console.log("refresh")
       console.log(context.state.refreshToken)
       return new Promise((resolve, reject) => {
         axios
-          .post("http://127.0.0.1:8000/api-token-refresh/", {
+          .post("/api-token-refresh/", {
             // username: usercredentials.username,
             refresh: context.state.refreshToken,
             // password: usercredentials.password,
@@ -117,6 +119,7 @@ const administration = createStore({
               refresh: response.data.refresh,
  
             });
+            console.log(response.data)
             resolve();
           })
           .catch((err) => {
@@ -133,7 +136,7 @@ const administration = createStore({
       );
       if (exists.length === 0) {
         axios
-          .get(`http://127.0.0.1:8000/decks/${item.id}/`)
+          .get(`/decks/${item.id}/`)
           .then((response) => {
             let data = response.data;
             data["amount"] = item.amount;
@@ -159,7 +162,7 @@ const administration = createStore({
       // };
       // console.log(cart);
       axios
-        .get("http://127.0.0.1:8000/decks/" + cart.key + "/")
+        .get("/decks/" + cart.key + "/")
         .then((response) => {
           let data = response.data;
 
@@ -180,7 +183,7 @@ const administration = createStore({
         },
       };
 
-      axios.delete(`http://127.0.0.1:8000/decks/${id.id}/`, config);
+      axios.delete(`/decks/${id.id}/`, config);
     },
 
     async editProduct(context, data) {
@@ -204,7 +207,7 @@ const administration = createStore({
       };
 
       axios
-        .post(`http://127.0.0.1:8000/decks/`, data.form, config)
+        .post(`/decks/`, data.form, config)
         .then((response) => {
           return response.data;
         });
@@ -217,7 +220,7 @@ const administration = createStore({
         },
       };
 
-      axios.post(`http://127.0.0.1:8000/images/`, data.form, config);
+      axios.post(`/images/`, data.form, config);
     },
    
   },

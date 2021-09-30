@@ -206,7 +206,7 @@ export default {
   methods: {
     async products() {
       this.$store.commit("setIsLoading", true);
-      await axios.get("http://127.0.0.1:8000/decks/").then((response) => {
+      await axios.get("/decks/").then((response) => {
         // let data = JSON.parse(response.data);
         this.decks = response.data;
       });

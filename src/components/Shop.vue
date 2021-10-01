@@ -168,15 +168,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-#c-toast-container {
-  background-color: blue;
-}
-@keyframes ping {
-  75%,
-  100% {
-    transform: scale();
-    opacity: 0;
-  }
-}
-</style>

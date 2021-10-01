@@ -11,9 +11,7 @@ import axios from "@/axios";
 
 // Vue.use(Vuex)
 const administration = createStore({
-  plugins: [
-    createPersistedState(),
-  ],
+  plugins: [createPersistedState()],
   state: {
     accessToken: null,
     refreshToken: null,
@@ -75,7 +73,6 @@ const administration = createStore({
     },
   },
   actions: {
-    
     userLogout(context) {
       if (context.getters.loggedIn) {
         context.commit("destroyToken");
@@ -112,9 +109,8 @@ const administration = createStore({
             context.commit("updateStorage", {
               access: response.data.access,
               refresh: response.data.refresh,
- 
             });
-            console.log(response.data)
+            console.log(response.data);
             resolve();
           })
           .catch((err) => {
@@ -127,14 +123,15 @@ const administration = createStore({
         (i) => i.id === item.id
       );
       if (exists.length === 0) {
-        axios
-          .get(`/decks/${item.id}/`)
-          .then((response) => {
-            let data = response.data;
-            data["amount"] = item.amount;
-            context.commit("updateCartState", data);
-            // state.cart.items.push(data)
-          });
+        axios.get(`/decks/${item.id}/`).then((response) => {
+          let data = response.data;
+          data["amount"] = item.amount;
+          context.commit("updateCartState", data);
+          // state.cart.items.push(data)
+          return true;
+        });
+      } else {
+        return false;
       }
     },
     removeFromCart(context, data) {
@@ -153,18 +150,16 @@ const administration = createStore({
       //   },
       // };
       // console.log(cart);
-      axios
-        .get("/decks/" + cart.key + "/")
-        .then((response) => {
-          let data = response.data;
+      axios.get("/decks/" + cart.key + "/").then((response) => {
+        let data = response.data;
 
-          context.commit("updateCartState", {
-            key: cart.key,
-            value: [data, cart.value],
-          });
-
-          // console.log(response.data)
+        context.commit("updateCartState", {
+          key: cart.key,
+          value: [data, cart.value],
         });
+
+        // console.log(response.data)
+      });
       // console.log(data.data)
     },
     deleteProduct(context, id) {
@@ -198,11 +193,9 @@ const administration = createStore({
         },
       };
 
-      axios
-        .post(`/decks/`, data.form, config)
-        .then((response) => {
-          return response.data;
-        });
+      axios.post(`/decks/`, data.form, config).then((response) => {
+        return response.data;
+      });
     },
     async addImages(context, data) {
       await context.dispatch("refreshToken");
@@ -214,7 +207,6 @@ const administration = createStore({
 
       axios.post(`/images/`, data.form, config);
     },
-   
   },
 });
 

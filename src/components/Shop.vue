@@ -109,6 +109,8 @@
 
 <script>
 import axios from "@/axios";
+// import Toast from "vue-toastification";
+// import "vue-toastification/dist/index.css";
 export default {
   name: "Shop",
 
@@ -122,23 +124,39 @@ export default {
   },
   methods: {
     async products() {
-      // console.log("a");
-      // axios.get("http://127.0.0.1:8000/decks/");
-      // let config = {
-      //   // headers: {
-      //   //   Accept: "application/json",
-      //   // },
-      // };
       await axios.get("/decks/").then((response) => {
         // let data = JSON.parse(response.data);
         this.decks = response.data;
       });
     },
     addToCart(id) {
-      this.$store.dispatch("addToCart", {
-        id: id,
-        amount: 1,
-      });
+      this.$store
+        .dispatch("addToCart", {
+          id: id,
+          amount: 1,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response == false) {
+            this.$toast.show(`Product already in cart`, {
+              type: "success",
+              position: "top",
+              duration: 4000,
+              useDefaultCss: false,
+              class:
+                "bg-red-500 border-red-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
+            });
+          } else {
+            this.$toast.show(`Product added to cart`, {
+              type: "success",
+              position: "top",
+              duration: 4000,
+              useDefaultCss: false,
+              class:
+                "bg-green-500 border-green-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
+            });
+          }
+        });
       this.cart = this.$store.getters.cartLength;
     },
     goToProduct(id) {

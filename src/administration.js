@@ -207,6 +207,16 @@ const administration = createStore({
 
       axios.post(`/images/`, data.form, config);
     },
+    async deleteImage(context, id) {
+      await context.dispatch("refreshToken");
+      let config = {
+        headers: {
+          Authorization: `Bearer ${context.state.accessToken}`,
+        },
+      };
+
+      axios.delete(`/images/${id.id}/`, config);
+    },
   },
 });
 

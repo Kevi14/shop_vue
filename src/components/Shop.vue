@@ -141,19 +141,21 @@ export default {
             this.$toast.show(`Product already in cart`, {
               type: "success",
               position: "top",
-              duration: 4000,
+              duration: 2000,
               useDefaultCss: false,
               class:
                 "bg-red-500 border-red-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
+              queue:true,
             });
           } else {
             this.$toast.show(`Product added to cart`, {
               type: "success",
               position: "top",
-              duration: 4000,
+              duration: 2000,
               useDefaultCss: false,
               class:
                 "bg-green-500 border-green-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
+              queue:true,
             });
           }
         });

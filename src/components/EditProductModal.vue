@@ -63,13 +63,13 @@
               </div>
             </div>
 
-            <div class="flex justify-center">
+            <!-- <div class="flex justify-center">
               <div class="flex">
                 <h1 class="text-gray-600 font-bold md:text-2xl text-xl">
                   Tailwind Form
                 </h1>
               </div>
-            </div>
+            </div> -->
 
             <div class="grid grid-cols-1 mt-5 mx-7">
               <label
@@ -90,7 +90,8 @@
                   border-2 border-purple-300
                   mt-1
                   focus:outline-none
-                  focus:ring-2 focus:ring-purple-600
+                  focus:ring-2
+                  focus:ring-purple-600
                   focus:border-transparent
                 "
                 type="text"
@@ -116,7 +117,8 @@
                   border-2 border-purple-300
                   mt-1
                   focus:outline-none
-                  focus:ring-2 focus:ring-purple-600
+                  focus:ring-2
+                  focus:ring-purple-600
                   focus:border-transparent
                 "
                 type="text"
@@ -143,7 +145,8 @@
                   border-2 border-purple-300
                   mt-1
                   focus:outline-none
-                  focus:ring-2 focus:ring-purple-600
+                  focus:ring-2
+                  focus:ring-purple-600
                   focus:border-transparent
                 "
                 type="number"
@@ -169,7 +172,8 @@
                   border-2 border-purple-300
                   mt-1
                   focus:outline-none
-                  focus:ring-2 focus:ring-purple-600
+                  focus:ring-2
+                  focus:ring-purple-600
                   focus:border-transparent
                 "
                 type="text"
@@ -178,8 +182,7 @@
             </div>
             <div
               class="
-                md:px-4
-                md:grid md:grid-cols-2
+                md:px-4 md:grid md:grid-cols-2
                 lg:grid-cols-3
                 gap-12
                 space-y-4
@@ -208,8 +211,7 @@
                       border-4 border-dashed
                       w-40
                       h-32
-                      hover:bg-gray-100
-                      hover:border-purple-300
+                      hover:bg-gray-100 hover:border-purple-300
                       group
                     "
                     :style="`background:url(${this.primaryPhotoUrl}) center/cover no-repeat;`"
@@ -245,9 +247,9 @@
                       border-4 border-dashed
                       w-40
                       h-32
-                      hover:bg-gray-100
-                      hover:border-purple-300
+                      hover:bg-gray-100 hover:border-purple-300
                       group
+                      relative
                     "
                     :style="`background:url(${this.imageArrayUrl[i]}) center/cover no-repeat;`"
                   >
@@ -291,6 +293,17 @@
                       type="file"
                       class="hidden w-full h-full"
                     />
+                    <button @click="deleteImage(i)">
+                      <svg
+                        class="svg-icon w-10 h-10 absolute -inset-y-5"
+                        viewBox="0 0 20 20"
+                        style="fill: #ff0000; left: 8.23rem; right: 8rem"
+                      >
+                        <path
+                          d="M10.185,1.417c-4.741,0-8.583,3.842-8.583,8.583c0,4.74,3.842,8.582,8.583,8.582S18.768,14.74,18.768,10C18.768,5.259,14.926,1.417,10.185,1.417 M10.185,17.68c-4.235,0-7.679-3.445-7.679-7.68c0-4.235,3.444-7.679,7.679-7.679S17.864,5.765,17.864,10C17.864,14.234,14.42,17.68,10.185,17.68 M10.824,10l2.842-2.844c0.178-0.176,0.178-0.46,0-0.637c-0.177-0.178-0.461-0.178-0.637,0l-2.844,2.841L7.341,6.52c-0.176-0.178-0.46-0.178-0.637,0c-0.178,0.176-0.178,0.461,0,0.637L9.546,10l-2.841,2.844c-0.178,0.176-0.178,0.461,0,0.637c0.178,0.178,0.459,0.178,0.637,0l2.844-2.841l2.844,2.841c0.178,0.178,0.459,0.178,0.637,0c0.178-0.176,0.178-0.461,0-0.637L10.824,10z"
+                        ></path>
+                      </svg>
+                    </button>
                   </label>
                 </div>
               </div>
@@ -316,6 +329,7 @@
                 Cancel
               </button>
               <button
+                @click="editProduct"
                 class="
                   w-auto
                   bg-purple-500
@@ -352,25 +366,14 @@ export default {
       cart: null,
       primaryPhoto: null,
       primaryPhotoUrl: null,
-      imageArray: [],
-      imageArrayUrl: [],
+      imageArray: [null],
+      imageArrayUrl: [null],
 
       //       seen: false,
       //       menu:false
     };
   },
   methods: {
-    deleteProduct() {
-      this.$store
-        .dispatch("deleteProduct", {
-          id: this.idToChange,
-          //   password: this.password,
-        })
-        .then(() => {
-          this.showDeleteModal = !this.showDeleteModal;
-          //   this.$router.push({ name: "Admin" });
-        });
-    },
     hideEditModalfunction() {
       this.$emit("toggle-modal");
     },
@@ -393,6 +396,30 @@ export default {
           //   this.$router.push({ name: "Admin" });
         });
     },
+    deleteImage(id) {
+      if (this.imageArray[id]) {
+        this.$store
+          .dispatch("deleteImage", {
+            id: this.imageArray[id].id,
+            //   password: this.password,
+          })
+          .then(() => {
+            this.$toast.show(`Image deleted`, {
+              type: "success",
+              position: "top",
+              duration: 2000,
+              useDefaultCss: false,
+              class:
+                "bg-green-500 border-red-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
+              queue: true,
+            });
+            delete this.imageArrayUrl[id];
+            delete this.imageArray[id];
+            // this.showEditModal = !this.showEditModal;
+            //   this.$router.push({ name: "Admin" });
+          });
+      }
+    },
     onPrimaryPicSelected(event) {
       this.primaryPhoto = event.target.files[0];
       this.primaryPhotoUrl = URL.createObjectURL(event.target.files[0]);
@@ -408,22 +435,21 @@ export default {
   },
 
   mounted() {
-    axios
-      .get(`/decks/${this.idToChange}/`)
-      .then((response) => {
-        let data = response.data;
-        this.title = data.title;
-        this.description = data.description;
-        this.price = data.price;
-        this.primaryPhotoUrl = data.get_image;
+    axios.get(`/decks/${this.idToChange}/`).then((response) => {
+      let data = response.data;
+      this.title = data.title;
+      this.description = data.description;
+      this.price = data.price;
+      this.primaryPhotoUrl = data.get_image;
+    });
+    axios.get(`/images/?product_id=${this.idToChange}`).then((response) => {
+      response.data.forEach((element) => {
+        this.imageArrayUrl.push(element.get_image);
+        this.imageArray.push(element);
+        // this.imageArray[index] =element
       });
-    axios
-      .get(`/images/?product_id=${this.idToChange}`)
-      .then((response) => {
-        response.data.forEach((element, index) => {
-          this.imageArrayUrl[index] = element.get_image;
-        });
-      });
+    });
+    // delete this.imageArrayUrl[0];
   },
 };
 </script>

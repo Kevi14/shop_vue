@@ -22,7 +22,7 @@ Contact Us
 
 
 export default {
-  name: "Admin",
+  name: "NotFound",
   data: function () {
     return {
     };

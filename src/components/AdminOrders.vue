@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col pt-32 ">
+  <div class="flex flex-col pt-32">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div
@@ -179,7 +179,6 @@ export default {
 
       await axios.get(`/orders/`, config).then((response) => {
         this.orders_data = response.data;
-        console.log(response);
       });
     }
   },

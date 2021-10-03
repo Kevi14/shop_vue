@@ -456,11 +456,9 @@ export default {
         },
       };
 
-      axios
-        .post(`/decks/`, formData, config)
-        .then((response) => {
-          this.addImages(response.data.id);
-        });
+      await axios.post(`/decks/`, formData, config).then((response) => {
+        this.addImages(response.data.id);
+      });
     },
   },
 };

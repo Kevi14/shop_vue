@@ -94,7 +94,7 @@
             Cancel
           </button>
           <button
-            @click="deleteProduct()"
+            @click="deleteImage()"
             class="
               mb-2
               md:mb-0
@@ -122,32 +122,33 @@
 <script>
 // axios.defaults.baseURL = 'http://localhost:8000/';
 export default {
-  name: "DeleteProductModal",
-  props: ["idToChange"],
+  name: "DeleteImageModal",
+  props: ["imageId"],
+
   data: function () {
     return {
-      title: null,
-      description: null,
-      decks: [],
-      cart: null,
       showDeleteModal: false,
-
-      primaryPhoto: null,
-      primaryPhotoUrl: null,
-      showEditModal: false,
       //       seen: false,
       //       menu:false
     };
   },
   methods: {
-    deleteProduct() {
+    deleteImage() {
       this.$store
-        .dispatch("deleteProduct", {
-          id: this.idToChange,
-          //   password: this.password,
+        .dispatch("deleteImage", {
+          id: this.imageId,
         })
         .then(() => {
-          this.showDeleteModal = !this.showDeleteModal;
+          this.$toast.show(`Image deleted`, {
+            type: "success",
+            position: "top",
+            duration: 2000,
+            useDefaultCss: false,
+            class:
+              "bg-green-500 border-red-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
+            queue: true,
+          });
+          this.$emit("toggle-deleted");
           //   this.$router.push({ name: "Admin" });
         });
     },

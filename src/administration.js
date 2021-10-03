@@ -1,12 +1,6 @@
 import { createStore } from "vuex";
 
 import createPersistedState from "vuex-persistedstate";
-
-// console.log("B")
-
-// import Vue from 'vue'
-// import Vuex from 'vuex'
-// import { getAPI } from './axios-api'
 import axios from "@/axios";
 
 // Vue.use(Vuex)
@@ -35,10 +29,7 @@ const administration = createStore({
       state.refreshToken = null;
     },
     updateCartState(state, item) {
-      // console.log(item)
-
       state.cart.items.push(item);
-      // console.log(state.cart)
     },
     removeFromCartState(state, id) {
       state.cart.items.splice(
@@ -110,7 +101,7 @@ const administration = createStore({
               access: response.data.access,
               refresh: response.data.refresh,
             });
-            console.log(response.data);
+
             resolve();
           })
           .catch((err) => {
@@ -180,7 +171,6 @@ const administration = createStore({
           Authorization: `Bearer ${context.state.accessToken}`,
         },
       };
-      console.log(data.form);
 
       axios.patch(`/decks/${data.id}/`, data.form, config);
     },

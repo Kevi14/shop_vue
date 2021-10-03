@@ -136,7 +136,6 @@ export default {
           amount: 1,
         })
         .then((response) => {
-          console.log(response);
           if (response == false) {
             this.$toast.show(`Product already in cart`, {
               type: "success",
@@ -145,7 +144,7 @@ export default {
               useDefaultCss: false,
               class:
                 "bg-red-500 border-red-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
-              queue:true,
+              queue: true,
             });
           } else {
             this.$toast.show(`Product added to cart`, {
@@ -155,7 +154,7 @@ export default {
               useDefaultCss: false,
               class:
                 "bg-green-500 border-green-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
-              queue:true,
+              queue: true,
             });
           }
         });

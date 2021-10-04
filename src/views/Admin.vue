@@ -1,27 +1,27 @@
 <template>
-  <div class="home bg-gradient-to-tr from-red-300 to-yellow-200 h-screen overflow-auto">
+  <div class="home bg-gradient-to-tr from-red-300 to-yellow-200 h-screen overflow-auto ">
     
 
-    <div class="pt-32  items-center justify-center"  style="z-index:-100;">
+    <div class="pt-32 flex items-center justify-center overflow-auto"  style="z-index:-100;">
   <!-- <div class="pt-32"> -->
     <div class="rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
       <!-- Current: "text-gray-900", Default: "text-gray-500 hover:text-gray-700" -->
-      <a @click="openProducts" :class="this.shopAdminVisible ? 'text-gray-900' :''" class="text-gray-500 rounded-l-lg group relative min-w-0 flex-1  bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10" aria-current="page">
+      <a @click="openProducts" :class="this.shopAdminVisible ? 'text-gray-900' :''" class="text-gray-500 rounded-l-lg group relative min-w-0 flex-1  bg-white py-4 px-4 text-base font-medium text-center hover:bg-gray-50 focus:z-10" aria-current="page">
         <span>Products</span>
         <span aria-hidden="true" class=" absolute inset-x-0 bottom-0 h-0.5" :class="this.shopAdminVisible ? 'bg-indigo-500' :''"> </span>
       </a>
 
-      <a  @click="openOrder" :class="this.adminOrdersVisible ? 'text-gray-900' :''"  class="text-gray-500 hover:text-gray-700 group relative min-w-0 flex-1 bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10">
+      <a  @click="openOrder" :class="this.adminOrdersVisible ? 'text-gray-900' :''"  class="text-gray-500 hover:text-gray-700 group relative min-w-0 flex-1 bg-white py-4 px-4 text-base font-medium text-center hover:bg-gray-50 focus:z-10">
         <span>Orders</span>
         <span aria-hidden="true" :class="this.adminOrdersVisible ? 'bg-indigo-500' :''" class="bg-transparent absolute inset-x-0 bottom-0 h-0.5"></span>
       </a>
 
-      <a href="#" class="text-gray-500 hover:text-gray-700 group relative min-w-0 flex-1  bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10">
+      <a href="#" class="text-gray-500 hover:text-gray-700 group relative min-w-0 flex-1  bg-white py-4 px-4 text-base font-medium text-center hover:bg-gray-50 focus:z-10">
         <span>Team Members</span>
         <span aria-hidden="true" class="bg-transparent absolute inset-x-0 bottom-0 h-0.5"></span>
       </a>
 
-      <a href="#" class="text-gray-500 hover:text-gray-700 rounded-r-lg group relative min-w-0 flex-1 bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10">
+      <a href="#" class="text-gray-500 hover:text-gray-700 rounded-r-lg group relative min-w-0 flex-1 bg-white py-4 px-4 text-base font-medium text-center hover:bg-gray-50 focus:z-10">
         <span>Billing</span>
         <span aria-hidden="true" class="bg-transparent absolute inset-x-0 bottom-0 h-0.5"></span>
       </a>

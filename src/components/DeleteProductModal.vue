@@ -144,21 +144,14 @@ export default {
       this.$store
         .dispatch("deleteProduct", {
           id: this.idToChange,
-          //   password: this.password,
         })
         .then(() => {
           this.showDeleteModal = !this.showDeleteModal;
-          //   this.$router.push({ name: "Admin" });
         });
     },
     hideDeleteModalfunction() {
       this.$emit("toggle-modal");
     },
   },
-
-  //   mounted() {
-  //     this.products();
-
-  //   },
 };
 </script>

@@ -1,4 +1,3 @@
-
 <template>
   <div
     class="
@@ -208,7 +207,7 @@ export default {
       decks: [],
       cart: null,
       //   people,
-      cartdata: computed(() => JSON.parse(this.$store.getters.getCart)),
+      cartdata: computed(() => JSON.parse(this.$store.getters.getCart))
       //       seen: false,
       //       menu:false
     };
@@ -223,17 +222,15 @@ export default {
     },
     removeFromCartf(id) {
       this.$store.dispatch("removeFromCart", { id: id });
-    },
+    }
   },
   created() {
     this.cartdata.items.forEach((element) => {
       this.amount[element.id] = element.amount;
     });
-  },
+  }
   //   components: {
 
   //   },
 };
 </script>
-
-

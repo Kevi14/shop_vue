@@ -2,6 +2,9 @@
   "name": "shop_vue",
   "version": "0.1.0",
   "private": true,
+  
+"postinstall": "npm run build",
+"start": "node server.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -14,11 +17,15 @@
     "axios": "^0.21.4",
     "bulma-toast": "^2.4.1",
     "core-js": "^3.6.5",
+    "epress": "0.0.1-security",
     "postcss": "^7",
+    "serve-static": "^1.14.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "vue": "^3.0.0",
+    "vue-country-region-select": "^2.0.16",
     "vue-router": "^4.0.0-0",
     "vue-toastification": "^1.7.11",
+    "vue3-country-region-select": "^1.0.0",
     "vuex": "^4.0.0-alpha.1",
     "vuex-persistedstate": "^4.0.0"
   },
@@ -57,4 +64,5 @@
     "last 2 versions",
     "not dead"
   ]
+  
 }

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "express":"*",
+    "connect-history-api-fallback":"*",
     "@meforma/vue-toaster": "^1.2.2",
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "autoprefixer": "^9",

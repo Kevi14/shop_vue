@@ -113,7 +113,6 @@ import axios from "@/axios";
 // import "vue-toastification/dist/index.css";
 export default {
   name: "Shop",
-
   data: function () {
     return {
       decks: [],

@@ -78,11 +78,13 @@
             sm:justify-start
           "
         >
-          <div class="flex-shrink-0 flex items-center">
-            <p class="h-8 w-auto text-white">School of Magic</p>
-            <!-- <img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow"> -->
-            <!-- <img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow"> -->
+  <div @click="goHome" class="flex-shrink-0 flex items-center cursor-pointer">
+                        <img class="block lg:hidden h-12 w-auto" src="../assets/school.svg" alt="Workflow">
+            <img class="hidden lg:block h-12 w-auto" src="../assets/school.svg" alt="Workflow">
+            <p class="h-6 w-auto text-white">School of Magic</p>
+
           </div>
+      
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4" id="bar">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
@@ -454,6 +456,9 @@ export default {
   methods: {
     hide_show() {
       this.$refs.dropdown;
+    },
+      goHome(){
+      this.$router.push({ path: '/' })
     },
     removeFromCartf(id) {
       this.$store.dispatch("removeFromCart", { id: id });

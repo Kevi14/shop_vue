@@ -22,7 +22,7 @@
         <div>
           <img
             class="w-full h-60 rounded-xl"
-            v-bind:src="deck.get_image"
+            v-bind:src="deck.image.url"
             alt="Colors"
           />
         </div>

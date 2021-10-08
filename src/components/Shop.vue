@@ -22,7 +22,7 @@
         <div>
           <img
             class="w-full h-60 rounded-xl"
-            v-bind:src="deck.image.url"
+            v-bind:src="'https://res.cloudinary.com/hayehilhw/'+deck.image.url"
             alt="Colors"
           />
         </div>

@@ -1,110 +1,29 @@
 <template>
-  <!-- Create By Joker Banny -->
-  <div class="min-h-screen bg-gray-50 flex justify-center items-center py-20">
-    <div
-      class="
-        md:px-4 md:grid md:grid-cols-2
-        lg:grid-cols-3
-        gap-12
-        space-y-4
-        md:space-y-0
-      "
-    >
-      <div
-        class="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg"
-        v-for="deck in decks"
-        :key="deck.id"
-      >
-        <h3 class="mb-3 text-xl font-bold text-black">
-          {{ deck.title }}
-          <!-- {deck.title} -->
-        </h3>
-        <div>
-          <img
-            class="w-full h-60 rounded-xl"
-            v-bind:src="'https://res.cloudinary.com/hayehilhw/'+deck.image"
-            alt="Colors"
-          />
-        </div>
-        <h1
-          @click="goToProduct(deck.id)"
-          class="mt-4 text-gray-800 text-3xl font-bold cursor-pointer"
-          style="word-wrap: break-word"
-        >
-          {{ deck.description }}
-        </h1>
-        <div class="my-4">
-          <div class="flex space-x-1 items-center">
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-indigo-600 mb-1.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </span>
-            <p>1:34:23 Minutes</p>
-          </div>
-          <div class="flex space-x-1 items-center">
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-indigo-600 mb-1.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-            </span>
-            <p>3 Parts</p>
-          </div>
-          <div class="flex space-x-1 items-center">
-            <!-- <span> -->
-            <img
-              src="https://www.svgrepo.com/show/5287/clover-cards.svg"
-              class="h-6 w-6 mb-1.5 text-indigo-600"
-            />
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 mb-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> -->
-            <!-- <img src = 'https://www.svgrepo.com/show/5287/clover-cards.svg'> -->
-            <!-- <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /> -->
-            <!-- </svg> -->
 
-            <!-- </span> -->
-            <p>64</p>
-          </div>
-          <button
-            class="
-              mt-4
-              text-xl
-              w-full
-              text-white
-              bg-indigo-600
-              py-1.5
-              rounded-xl
-              shadow-lg
-            "
-            @click="addToCart(deck.id)"
-          >
-            Add to cart
-          </button>
+<div class="bg-white">
+  <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 pt-20">
+    <h2 class="sr-only">Products</h2>
+
+    <div class="grid grid-cols-2 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+      <a  v-for="deck in decks"
+        :key="deck.id" @click="goToProduct(deck.id)" class="group">
+        <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+          <img v-bind:src="'https://res.cloudinary.com/hayehilhw/'+deck.image"   alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="w-full h-full object-center object-cover group-hover:opacity-75">
         </div>
-      </div>
+        <h3 class="mt-4 text-sm text-gray-700">
+          {{deck.title}}
+        </h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">
+          {{deck.price}}
+        </p>
+      </a>
+
+    
+
+      <!-- More products... -->
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -165,7 +84,7 @@ export default {
   },
   mounted() {
     this.products();
-    console.log(this.decks[0].image)
+    console.log(this.decks)
   },
 };
 </script>

@@ -2,17 +2,16 @@
   "name": "shop_vue",
   "version": "0.1.0",
   "private": true,
-  
-"postinstall": "npm run build",
-"start": "node server.js",
+  "postinstall": "npm run build",
+  "start": "node server.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "express":"*",
-    "connect-history-api-fallback":"*",
+    "express": "*",
+    "connect-history-api-fallback": "*",
     "@meforma/vue-toaster": "^1.2.2",
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "autoprefixer": "^9",
@@ -66,5 +65,4 @@
     "last 2 versions",
     "not dead"
   ]
-  
 }

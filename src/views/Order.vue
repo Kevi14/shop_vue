@@ -247,7 +247,7 @@ export default {
       search: null,
       exists: false,
       not_found: false,
-      product_data: []
+      product_data: [],
 
       //   people,
       // cartdata : computed(()=>JSON.parse(this.$store.getters.getCart)),
@@ -272,7 +272,7 @@ export default {
           }
         });
       // console.log(this.search);
-    }
-  }
+    },
+  },
 };
 </script>

@@ -16,6 +16,18 @@ export default {
   name: "Home",
   components: {
     Shop,
+  },  data: function () {
+    return {
+      search: null,
+      exists: false,
+      not_found: false,
+      product_data: [],
+
+      //   people,
+      // cartdata : computed(()=>JSON.parse(this.$store.getters.getCart)),
+      //       seen: false,
+      //       menu:false
+    };
   },
 };
 </script>

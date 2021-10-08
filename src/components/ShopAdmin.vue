@@ -25,8 +25,7 @@
           rounded-full
           shadow
           ripple
-          hover:shadow-lg
-          hover:bg-blue-800
+          hover:shadow-lg hover:bg-blue-800
           focus:outline-none
         "
         style=""
@@ -38,8 +37,7 @@
       <!-- <button class="absolute top-32 right-8"> Asdasd</button> -->
       <div
         class="
-          md:px-4
-          md:grid md:grid-cols-2
+          md:px-4 md:grid md:grid-cols-2
           lg:grid-cols-3
           gap-12
           space-y-4
@@ -173,7 +171,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import axios from "@/axios";

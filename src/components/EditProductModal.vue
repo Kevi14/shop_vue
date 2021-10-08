@@ -421,15 +421,15 @@ export default {
           this.showEditModal = !this.showEditModal;
           this.updateImages(this.idToChange);
           this.$toast.show(`Changes made successfully`, {
-              type: "success",
-              position: "top",
-              duration: 2000,
-              useDefaultCss: false,
-              class:
-                "bg-green-500 border-green-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
-              style:"z-index: 7000;",
-              queue: true,
-            });
+            type: "success",
+            position: "top",
+            duration: 2000,
+            useDefaultCss: false,
+            class:
+              "bg-green-500 border-green-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
+            style: "z-index: 7000;",
+            queue: true,
+          });
           //   this.$router.push({ name: "Admin" });
         });
     },

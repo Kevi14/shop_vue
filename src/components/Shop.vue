@@ -1,29 +1,67 @@
 <template>
+  <div class="bg-white">
+    <div
+      class="
+        max-w-2xl
+        mx-auto
+        py-16
+        px-4
+        sm:py-24 sm:px-6
+        lg:max-w-7xl lg:px-8
+        pt-20
+      "
+    >
+      <h2 class="sr-only">Products</h2>
 
-<div class="bg-white">
-  <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 pt-20">
-    <h2 class="sr-only">Products</h2>
+      <div
+        class="
+          grid grid-cols-2
+          gap-y-10
+          sm:grid-cols-2
+          gap-x-6
+          lg:grid-cols-3
+          xl:grid-cols-4 xl:gap-x-8
+        "
+      >
+        <a
+          v-for="deck in decks"
+          :key="deck.id"
+          @click="goToProduct(deck.id)"
+          class="group"
+        >
+          <div
+            class="
+              w-full
+              aspect-w-1 aspect-h-1
+              bg-gray-200
+              rounded-lg
+              overflow-hidden
+              xl:aspect-w-7 xl:aspect-h-8
+            "
+          >
+            <img
+              v-bind:src="'https://res.cloudinary.com/hayehilhw/' + deck.image"
+              alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
+              class="
+                w-full
+                h-full
+                object-center object-cover
+                group-hover:opacity-75
+              "
+            />
+          </div>
+          <h3 class="mt-4 text-sm text-gray-700">
+            {{ deck.title }}
+          </h3>
+          <p class="mt-1 text-lg font-medium text-gray-900">
+            {{ deck.price }}
+          </p>
+        </a>
 
-    <div class="grid grid-cols-2 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-      <a  v-for="deck in decks"
-        :key="deck.id" @click="goToProduct(deck.id)" class="group">
-        <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-          <img v-bind:src="'https://res.cloudinary.com/hayehilhw/'+deck.image"   alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="w-full h-full object-center object-cover group-hover:opacity-75">
-        </div>
-        <h3 class="mt-4 text-sm text-gray-700">
-          {{deck.title}}
-        </h3>
-        <p class="mt-1 text-lg font-medium text-gray-900">
-          {{deck.price}}
-        </p>
-      </a>
-
-    
-
-      <!-- More products... -->
+        <!-- More products... -->
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -84,7 +122,7 @@ export default {
   },
   mounted() {
     this.products();
-    console.log(this.decks)
+    console.log(this.decks);
   },
 };
 </script>

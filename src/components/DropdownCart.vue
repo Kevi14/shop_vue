@@ -231,8 +231,7 @@
                   rounded
                   font-bold
                   cursor-pointer
-                  hover:bg-teal-700
-                  hover:text-teal-100
+                  hover:bg-teal-700 hover:text-teal-100
                   bg-teal-100
                   text-teal-700
                   border

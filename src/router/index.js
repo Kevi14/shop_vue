@@ -7,7 +7,7 @@ import CheckoutPage from "../views/CheckoutPage.vue";
 import Billing from "../views/Billing.vue";
 import PaymentSuccessful from "../views/PaymentSuccessful.vue";
 import Order from "../views/Order.vue";
-import NotFound from "../views/NotFound.vue"
+import NotFound from "../views/NotFound.vue";
 const routes = [
   {
     path: "/",

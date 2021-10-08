@@ -22,7 +22,7 @@
         <div>
           <img
             class="w-full h-60 rounded-xl"
-            v-bind:src="'https://res.cloudinary.com/hayehilhw/'+deck.image.url"
+            v-bind:src="'https://res.cloudinary.com/hayehilhw/'+deck.image"
             alt="Colors"
           />
         </div>
@@ -165,6 +165,7 @@ export default {
   },
   mounted() {
     this.products();
+    console.log(this.decks[0].image)
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-gray-800 fixed w-full " style="z-index:3;">
+  <nav class="bg-gray-800 fixed w-full" style="z-index: 3">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -14,10 +14,8 @@
               p-2
               rounded-md
               text-gray-400
-              hover:text-white
-              hover:bg-gray-700
-              focus:outline-none
-              focus:ring-2 focus:ring-inset focus:ring-white
+              hover:text-white hover:bg-gray-700
+              focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white
             "
             aria-controls="mobile-menu"
             aria-expanded="false"
@@ -74,17 +72,26 @@
             flex-1 flex
             items-center
             justify-center
-            sm:items-stretch
-            sm:justify-start
+            sm:items-stretch sm:justify-start
           "
         >
-  <div @click="goHome" class="flex-shrink-0 flex items-center cursor-pointer">
-                        <img class="block lg:hidden h-12 w-auto" src="../assets/school.svg" alt="Workflow">
-            <img class="hidden lg:block h-12 w-auto" src="../assets/school.svg" alt="Workflow">
+          <div
+            @click="goHome"
+            class="flex-shrink-0 flex items-center cursor-pointer"
+          >
+            <img
+              class="block lg:hidden h-12 w-auto"
+              src="../assets/school.svg"
+              alt="Workflow"
+            />
+            <img
+              class="hidden lg:block h-12 w-auto"
+              src="../assets/school.svg"
+              alt="Workflow"
+            />
             <p class="h-6 w-auto text-white">School of Magic</p>
-
           </div>
-      
+
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4" id="bar">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
@@ -92,8 +99,7 @@
               <router-link
                 class="
                   text-gray-300
-                  hover:bg-gray-700
-                  hover:text-white
+                  hover:bg-gray-700 hover:text-white
                   px-3
                   py-2
                   rounded-md
@@ -106,8 +112,7 @@
               <router-link
                 class="
                   text-gray-300
-                  hover:bg-gray-700
-                  hover:text-white
+                  hover:bg-gray-700 hover:text-white
                   px-3
                   py-2
                   rounded-md
@@ -129,10 +134,7 @@
             flex
             items-center
             pr-2
-            sm:static
-            sm:inset-auto
-            sm:ml-6
-            sm:pr-0
+            sm:static sm:inset-auto sm:ml-6 sm:pr-0
           "
         >
           <div style="display: inline"></div>
@@ -145,8 +147,7 @@
               rounded-full
               text-gray-400
               hover:text-white
-              focus:outline-none
-              focus:ring-offset-gray-800 focus:ring-white
+              focus:outline-none focus:ring-offset-gray-800 focus:ring-white
             "
           ></button>
 
@@ -162,8 +163,7 @@
                   rounded-full
                   text-gray-400
                   hover:text-white
-                  focus:outline-none
-                  focus:ring-offset-gray-800 focus:ring-white
+                  focus:outline-none focus:ring-offset-gray-800 focus:ring-white
                 "
               >
                 <span class="sr-only">View notifications</span>
@@ -308,8 +308,7 @@
                       rounded
                       font-bold
                       cursor-pointer
-                      hover:bg-teal-700
-                      hover:text-teal-100
+                      hover:bg-teal-700 hover:text-teal-100
                       bg-teal-100
                       text-teal-700
                       border
@@ -363,8 +362,7 @@
         <router-link
           class="
             text-gray-300
-            hover:bg-gray-700
-            hover:text-white
+            hover:bg-gray-700 hover:text-white
             block
             px-3
             py-2
@@ -457,8 +455,8 @@ export default {
     hide_show() {
       this.$refs.dropdown;
     },
-      goHome(){
-      this.$router.push({ path: '/' })
+    goHome() {
+      this.$router.push({ path: "/" });
     },
     removeFromCartf(id) {
       this.$store.dispatch("removeFromCart", { id: id });

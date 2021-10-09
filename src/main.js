@@ -5,8 +5,8 @@ import "./index.css";
 import "./assets/tailwind.css";
 import administration from "./administration";
 import axios from "axios";
-import Toaster from '@meforma/vue-toaster';
-import vueCountryRegionSelect from 'vue3-country-region-select'
+import Toaster from "@meforma/vue-toaster";
+import vueCountryRegionSelect from "vue3-country-region-select";
 axios.defaults.baseURL = process.env.VUE_APP_AXIOS_BASE_URL;
 
 router.beforeEach((to, from, next) => {
@@ -21,4 +21,9 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-createApp(App).use(router).use(administration).use(Toaster).use(vueCountryRegionSelect).mount("#app");
+createApp(App)
+  .use(router)
+  .use(administration)
+  .use(Toaster)
+  .use(vueCountryRegionSelect)
+  .mount("#app");

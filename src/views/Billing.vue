@@ -1,14 +1,6 @@
 <template>
   <div class="about">
-    <div
-      class="
-        flex flex-col
-        pt-40
-       
-        w-full
-        h-screen
-      "
-    >
+    <div class="flex flex-col pt-40 w-full h-screen">
       <!-- component -->
       <div class="flex justify-center items-center">
         <div class="leading-loose">
@@ -30,13 +22,12 @@
               />
             </div>
 
-
             <div class="mt-2">
               <label class="block text-sm text-gray-600" for="cus_email"
                 >Email</label
               >
               <input
-              v-model="email"
+                v-model="email"
                 class="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded"
                 id="cus_email"
                 name="cus_email"
@@ -46,12 +37,12 @@
                 aria-label="Email"
               />
             </div>
-             
+
             <div class="mt-2">
               <label class="block text-sm text-gray-600" for="cus_email"
                 >Address</label
               >
-               
+
               <input
                 v-model="city"
                 class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
@@ -62,7 +53,7 @@
                 placeholder="Your City"
                 aria-label="City"
               />
-           
+
               <input
                 v-model="address_line"
                 class="w-full mt-2 px-2 py-2 text-gray-700 bg-gray-200 rounded"
@@ -74,21 +65,29 @@
                 aria-label="Email"
               />
             </div>
-      
+
             <div class="inline-block mt-2 w-1/2 pr-1">
               <label class="hidden block text-sm text-gray-600" for="cus_email"
                 >Country</label
               >
-              <country-select @change="changeState" v-model="country" class="w-full px-2 h-12 py-2 text-gray-700 bg-gray-200 rounded" topCountry="US"/>
-
-           
+              <country-select
+                @change="changeState"
+                v-model="country"
+                class="w-full px-2 h-12 py-2 text-gray-700 bg-gray-200 rounded"
+                topCountry="US"
+              />
             </div>
-                  <div class="inline-block mt-2 w-1/2 pr-1">
+            <div class="inline-block mt-2 w-1/2 pr-1">
               <label class="hidden block text-sm text-gray-600" for="cus_email"
                 >State</label
               >
 
-               <region-select v-model="state" :country="country" :region="region" class="w-full px-2 py-2 h-12 text-gray-700 bg-gray-200 rounded"/>
+              <region-select
+                v-model="state"
+                :country="country"
+                :region="region"
+                class="w-full px-2 py-2 h-12 text-gray-700 bg-gray-200 rounded"
+              />
             </div>
             <div class="flex items-center justify-center">
               <div class="inline-block -mx-1 pl-1 w-1/2 pt-7">
@@ -98,7 +97,7 @@
                   >Zip</label
                 >
                 <input
-                @change="ls"
+                  @change="ls"
                   v-model="zip_code"
                   class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
                   id="cus_email"
@@ -107,7 +106,6 @@
                   required=""
                   placeholder="Zip"
                 />
-                    
               </div>
             </div>
             <div class="mt-4 flex items-center justify-center pt-4">
@@ -131,8 +129,8 @@
         </div>
       </div>
     </div>
- 
-  <!-- <region-select /> -->
+
+    <!-- <region-select /> -->
   </div>
 </template>
 <script>

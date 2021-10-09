@@ -123,8 +123,7 @@
 // axios.defaults.baseURL = 'http://localhost:8000/';
 export default {
   name: "EditTrackingNumber",
-  props: ["order_id","tracking_number"],
-
+  props: ["order_id", "tracking_number"],
 
   data: function () {
     return {

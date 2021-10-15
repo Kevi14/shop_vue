@@ -249,7 +249,7 @@
                   :key="data.id"
                 >
                   <div class="p-2 w-12">
-                    <img v-bind:src="data.get_thumbnail" alt="img product" />
+                    <img v-bind:src=" 'https://res.cloudinary.com/hayehilhw/' + data.image" alt="img product" />
                   </div>
                   <div class="flex-auto text-sm w-32">
                     <div class="font-bold">{{ data.title }}</div>

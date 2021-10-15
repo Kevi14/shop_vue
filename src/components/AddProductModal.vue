@@ -179,6 +179,8 @@
             </div>
             <div
               class="
+              grid
+                grid-cols-2
                 md:px-4 md:grid md:grid-cols-2
                 lg:grid-cols-3
                 gap-12

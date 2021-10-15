@@ -56,7 +56,7 @@
           <div>
             <img
               class="w-full min-h-60 rounded-xl"
-              v-bind:src="deck.get_image"
+              v-bind:src="'https://res.cloudinary.com/hayehilhw/' + deck.image"
               alt="Colors"
             />
           </div>
@@ -168,6 +168,15 @@
         v-if="showAddModal"
         @toggle-modal="toggleAddModalfunction"
       />
+
+      <ToasterNotifications
+        @click="toggleToast"
+        v-if="toaster_visibility"
+        class="absolute top-0 mt-20 cursor-pointer"
+        @toggle_toaster="toggleToast"
+        v-bind:time="2000"
+        v-bind:type="type_of_toaster"
+      />
     </div>
   </div>
 </template>
@@ -177,15 +186,18 @@ import axios from "@/axios";
 import DeleteProductModal from "@/components/DeleteProductModal.vue";
 import EditProductModal from "@/components/EditProductModal.vue";
 import AddProductModal from "@/components/AddProductModal.vue";
+import ToasterNotifications from "@/components/ToasterNotifications.vue";
 export default {
   name: "ShopAdmin",
   components: {
     DeleteProductModal,
     EditProductModal,
     AddProductModal,
+    ToasterNotifications,
   },
   data: function () {
     return {
+      type_of_toaster:null,
       title: null,
       description: null,
       decks: [],
@@ -196,11 +208,15 @@ export default {
       primaryPhoto: null,
       primaryPhotoUrl: null,
       showEditModal: false,
+      toaster_visibility: true,
       //       seen: false,
       //       menu:false
     };
   },
   methods: {
+    toggleToast() {
+      this.toaster_visibility = !this.toaster_visibility;
+    },
     async products() {
       this.$store.commit("setIsLoading", true);
       await axios.get("/decks/").then((response) => {
@@ -218,6 +234,7 @@ export default {
     showDeleteModalfunction(id) {
       this.showDeleteModal = !this.showDeleteModal;
       this.idToChange = id;
+    
       //
     },
     hideEditModalfunction() {

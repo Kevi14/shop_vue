@@ -50,10 +50,10 @@
               "
             />
           </div>
-          <h3 class="mt-4 text-sm text-gray-700">
+          <h3 class="mt-4 text-sm text-gray-700 dark:text-gray-700">
             {{ deck.title }}
           </h3>
-          <p class="mt-1 text-lg font-medium text-gray-900">
+          <p class="mt-1 text-lg font-medium text-gray-900 dark:text-gray-900">
             {{ deck.price }}
           </p>
         </a>

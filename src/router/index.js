@@ -8,6 +8,7 @@ import Billing from "../views/Billing.vue";
 import PaymentSuccessful from "../views/PaymentSuccessful.vue";
 import Order from "../views/Order.vue";
 import NotFound from "../views/NotFound.vue";
+import AdminOrderDetail from "../views/AdminOrderDetail.vue";
 const routes = [
   {
     path: "/",
@@ -60,6 +61,14 @@ const routes = [
     path: "/order/",
     name: "order",
     component: Order,
+  },
+  {
+    path: "/admin/order/:id",
+    name: "admin_order",
+    component: AdminOrderDetail,
+    meta: {
+      requiresLogin: true,
+    },
   },
   {
     path: "/:pathMatch(.*)*",

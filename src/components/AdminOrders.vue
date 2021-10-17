@@ -313,7 +313,7 @@
                           {{ order.full_name }}
                         </div>
                         <div class="text-sm text-gray-500">
-                          jane.cooper@example.com
+                          {{order.contact_email}}
                         </div>
                       </div>
                     </div>

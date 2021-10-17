@@ -111,8 +111,9 @@ const administration = createStore({
     },
     addToCart(context, item) {
       const exists = context.getters.getCartg.items.filter(
-        (i) => i.id === item.id
+        (i) => i.id == item.id
       );
+      // console.log(context.getters.getCartg.items.id)
       if (exists.length === 0) {
         axios.get(`/decks/${item.id}/`).then((response) => {
           let data = response.data;

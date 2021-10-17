@@ -34,7 +34,7 @@
             >Success</span
           >
           <p class="text-sm text-gray-600 dark:text-gray-200">
-            Your account was registered!
+            {{this.message}}
           </p>
         </div>
       </div>
@@ -51,7 +51,7 @@
   <div class="px-4 py-2 -mx-3">
       <div class="mx-3">
           <span class="font-semibold text-blue-500 dark:text-blue-400">Info</span>
-          <p class="text-sm text-gray-600 dark:text-gray-200">This channel archived by the owner!</p>
+          <p class="text-sm text-gray-600 dark:text-gray-200">{{this.message}}</p>
       </div>
   </div>
 </div>
@@ -67,7 +67,7 @@
   <div class="px-4 py-2 -mx-3">
       <div class="mx-3">
           <span class="font-semibold text-yellow-400 dark:text-yellow-300">Warning</span>
-          <p class="text-sm text-gray-600 dark:text-gray-200">Your image size is too large!</p>
+          <p class="text-sm text-gray-600 dark:text-gray-200">{{this.message}}</p>
       </div>
   </div>
 </div>
@@ -83,7 +83,7 @@
 <div class="px-4 py-2 pb-5  -mx-3">
   <div class="mx-3">
       <span class="font-semibold text-red-500 dark:text-red-400">Error</span>
-      <p class="text-sm text-gray-600 dark:text-gray-200">Your email is already used!</p>
+      <p class="text-sm text-gray-600 dark:text-gray-200">{{this.message}}</p>
   </div>
 </div>
 </div>
@@ -95,7 +95,7 @@
 
 export default {
   name: "ToasterNotifications.vue",
-  props: ["time", "type"],
+  props: ["time", "type","message"],
   //   components: {
   //     DeleteProductModal,
   //     EditProductModal,

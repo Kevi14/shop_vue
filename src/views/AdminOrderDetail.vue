@@ -1,8 +1,6 @@
 <template>
   <div class="bg-gray-50">
-    <div class="flex items-center">
-      
-    </div>
+    <div class="flex items-center"></div>
     <main
       v-if="exists != false"
       class="max-w-2xl mx-auto pt-8 pb-24 sm:pt-16 sm:px-6 lg:max-w-7xl lg:px-8"
@@ -31,9 +29,9 @@
         </div>
         <p class="text-sm text-gray-600">
           Order placed
-          <time datetime="2021-03-22" class="font-medium text-gray-900"
-            >{{Date(order_data[0].created_at).substring(0, 21)}}</time
-          >
+          <time datetime="2021-03-22" class="font-medium text-gray-900">{{
+            Date(order_data[0].created_at).substring(0, 21)
+          }}</time>
         </p>
       </div>
 

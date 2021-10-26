@@ -1,8 +1,7 @@
 <template>
-
   <div class="bg-white">
-<div class="flex justify-center items-center">
-           <ToasterNotifications
+    <div class="flex justify-center items-center">
+      <ToasterNotifications
         @click="toggleToast"
         v-if="toaster_visibility"
         class="fixed top-0 mt-20 cursor-pointer"
@@ -11,10 +10,8 @@
         v-bind:type="type_of_toaster"
         v-bind:message="toaster_message"
       />
-</div>
+    </div>
     <div
-
-
       class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"
     >
       <div class="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
@@ -114,8 +111,6 @@
           <!-- Reviews -->
           <div class="mt-3">
             <h3 class="sr-only">Reviews</h3>
-
-       
           </div>
 
           <div class="mt-6">
@@ -303,9 +298,7 @@
         </div>
       </div>
     </div>
-
   </div>
-  
 </template>
 
 <script>
@@ -316,15 +309,15 @@ import ToasterNotifications from "@/components/ToasterNotifications.vue";
 import axios from "@/axios";
 export default {
   name: "ProductDetail",
-    components: {
-      ToasterNotifications,
-    },
+  components: {
+    ToasterNotifications,
+  },
 
   data: function () {
     return {
-      toaster_message:null,
-            toaster_visibility: true,
-            type_of_toaster:null,
+      toaster_message: null,
+      toaster_visibility: true,
+      type_of_toaster: null,
       product: null,
       primary_image: null,
       image_array: [
@@ -335,7 +328,7 @@ export default {
     };
   },
   methods: {
-       toggleToast() {
+    toggleToast() {
       this.toaster_visibility = !this.toaster_visibility;
     },
     change_img(i) {
@@ -353,15 +346,13 @@ export default {
         })
         .then((response) => {
           if (response == false) {
-            this.toaster_message = 'Product already in cart'
-                        this.toaster_visibility=true
-            this.type_of_toaster="error"
-            
+            this.toaster_message = "Product already in cart";
+            this.toaster_visibility = true;
+            this.type_of_toaster = "error";
           } else {
-            
-            this.toaster_message = 'Product addded to cart'
-            this.toaster_visibility=true
- this.type_of_toaster="success"
+            this.toaster_message = "Product addded to cart";
+            this.toaster_visibility = true;
+            this.type_of_toaster = "success";
           }
         });
       this.cart = this.$store.getters.cartLength;

@@ -16,7 +16,8 @@ export default {
   name: "Home",
   components: {
     Shop,
-  },  data: function () {
+  },
+  data: function () {
     return {
       search: null,
       exists: false,

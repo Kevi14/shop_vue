@@ -197,7 +197,7 @@ export default {
   },
   data: function () {
     return {
-      type_of_toaster:null,
+      type_of_toaster: null,
       title: null,
       description: null,
       decks: [],
@@ -234,7 +234,7 @@ export default {
     showDeleteModalfunction(id) {
       this.showDeleteModal = !this.showDeleteModal;
       this.idToChange = id;
-    
+
       //
     },
     hideEditModalfunction() {

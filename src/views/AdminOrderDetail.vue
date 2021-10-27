@@ -9,6 +9,7 @@
 
       <div
         class="
+        mt-10
           px-4
           space-y-2
           sm:px-0 sm:flex sm:items-baseline sm:justify-between sm:space-y-0
@@ -34,7 +35,70 @@
           }}</time>
         </p>
       </div>
+      <div class="flex items-center justify-center">
+      <section
+        aria-labelledby="products-heading"
+        class="mt-6 flex"
+       
+      >
+        <h2 id="products-heading" class="sr-only">Products purchased</h2>
+  
+        <div class="space-y-8">
+          <div
+            class="
+              bg-white
+              border-t border-b border-gray-200
+              shadow-sm
+              sm:border sm:rounded-lg
+            "
+          >
+            <div
+              class="
+                py-6
+                px-4
+                sm:px-6
 
+              "
+            >
+              <div class="sm:flex lg:col-span-7">
+                
+        
+   
+                <dl class="grid grid-cols-2 gap-x-6 text-sm ">
+                  <div>
+                    <dt class="font-large text-gray-900">Delivery address</dt>
+                    <dd class="mt-3 text-gray-500">
+                      <span class="block">Floyd Miles</span>
+                      <span class="block">7363 Cynthia Pass</span>
+                      <span class="block">Toronto, ON N3Y 4H8</span>
+                                            <span class="block"> <p class="inline text-black"> Test : </p> {{order_data[0]}}</span>
+                      <span class="block"> <p class="inline text-black"> State : </p> {{order_data[0].state}}</span>
+                      <span class="block"> <p class="inline text-black"> City : </p> {{order_data[0].city}}</span>
+                      <span class="block"> <p class="inline text-black"> Address line 1 : </p> {{order_data[0].adress_line}}</span>
+                       <span class="block"> <p class="inline text-black"> Zip Code : </p> {{order_data[0].zip_code}}</span>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt class="font-large text-gray-900">Shipping updates</dt>
+                    <dd class="mt-3 text-gray-500 space-y-3">
+                      <p> {{order_data[0].contact_email}}</p>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+    
+            
+            </div>
+          </div>
+
+          <!-- More products... -->
+        </div>
+      </section>
+</div>
+
+
+
+              
       <!-- Products -->
       <section
         aria-labelledby="products-heading"
@@ -73,7 +137,8 @@
                   "
                 >
                   <img
-                    :src="product.product.get_image"
+                  
+                    :src="'https://res.cloudinary.com/hayehilhw/' + product.product.image"
                     alt="Insulated bottle with white base and black snap lid."
                     class="
                       w-full
@@ -82,6 +147,7 @@
                       sm:w-full sm:h-full
                     "
                   />
+
                 </div>
 
                 <div class="mt-6 sm:mt-0 sm:ml-6">
@@ -94,28 +160,13 @@
                   <p class="mt-3 text-sm text-gray-500">
                     {{ product.product.description }}
                   </p>
+                   <h3 class="text-base font-medium text-gray-900 mt-2">
+                    <a href="#"> Amount : {{ product.amount }}</a>
+                  </h3>
                 </div>
               </div>
 
-              <div class="mt-6 lg:mt-0 lg:col-span-5">
-                <dl class="grid grid-cols-2 gap-x-6 text-sm">
-                  <div>
-                    <dt class="font-medium text-gray-900">Delivery address</dt>
-                    <dd class="mt-3 text-gray-500">
-                      <span class="block">Floyd Miles</span>
-                      <span class="block">7363 Cynthia Pass</span>
-                      <span class="block">Toronto, ON N3Y 4H8</span>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt class="font-medium text-gray-900">Shipping updates</dt>
-                    <dd class="mt-3 text-gray-500 space-y-3">
-                      <p>f•••@example.com</p>
-                      <p>1•••••••••40</p>
-                    </dd>
-                  </div>
-                </dl>
-              </div>
+            
             </div>
           </div>
 
@@ -129,7 +180,7 @@
           <div class="bg-gray-200 rounded-full overflow-hidden">
             <div
               class="h-2 bg-indigo-600 rounded-full"
-              style="width: calc((0 * 2 + 1) / 8 * 100%)"
+              :style="`width: calc((${order_status_value} * 2 + 1) / 8 * 100%)`"
             ></div>
           </div>
           <div
@@ -150,7 +201,53 @@
           </div>
         </div>
       </div>
+            <!-- Tracking number div -->
+      <div class="flex justify-center items-center">
+      <button @click="toggleTrackingEdit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-10">
+  Add a tracking number
+</button>
 
+    
+      </div>
+        <div class="flex items-center justify-center mb-4" v-if="tracking_edit">
+              <input      
+                          
+                          v-model="new_tracking_number"
+                          class="
+                            
+                            h-10
+                            pl-3
+                            pr-8
+                            
+                            text-base
+                            placeholder-gray-600
+                            border
+                            rounded-lg
+                            focus:shadow-outline
+                          "
+                          type="text"
+                          placeholder="Tracking Number"
+                        />
+                        
+
+  <div class="m-3">
+    <button class="bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
+      <span class="mr-2">Change</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+      </svg>
+    </button>
+  </div>
+
+
+      </div>
+                  <!-- Status div -->
+      <div class="flex justify-center items-center">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-10">
+  Change status
+</button>
+      </div>
+      
       <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="bg-indigo-700">
         <div
@@ -177,6 +274,7 @@
 
       <!-- Billing -->
     </main>
+    
   </div>
 </template>
 
@@ -198,6 +296,9 @@ export default {
       product_data: [],
       loading:false,
       order_data:null,
+      order_status_value:null,
+      tracking_edit:false,
+      new_tracking_number:null,
       //   people,
       // cartdata : computed(()=>JSON.parse(this.$store.getters.getCart)),
       //       seen: false,
@@ -206,6 +307,18 @@ export default {
   },
 
   methods: {
+    toggleTrackingEdit(){
+this.tracking_edit = ! this.tracking_edit
+    },
+    changeTrackingNumber(tracking_num){
+      this.$store.dispatch('refreshToken')
+      let config = {
+        headers: {
+          Authorization: `Bearer ${this.$store.state.accessToken}`
+        }};
+
+        axios.patch(`orders/${this.order_data[0].id}/`,{tracking_number :tracking_num},config)
+    },
     getOrderDetails(order_id){
       this.$store.dispatch('refreshToken')
            let config = {
@@ -214,7 +327,18 @@ export default {
         }
       };
   axios.get(`/orders/?order_id=${order_id}`, config).then((response) => {
-        this.order_data = response.data;})
+        this.order_data = response.data;
+        if(this.order_data[0].status ==="Processing"){
+          this.order_status_value=1
+        }
+                if(this.order_data[0].status ==="Shipped"){
+          this.order_status_value=2
+        }
+                if(this.order_data[0].status ==="Delivered"){
+          this.order_status_value=4
+        }
+        
+        })
     },
     async getItemsOrderDetails(order_id) {
       this.loading= true

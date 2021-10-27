@@ -113,7 +113,7 @@ export default {
     //     this.products();
     // console.log(this.$route.query.token)
     axios
-      .post("http://localhost:8000/capture_payment/", {
+      .post("/capture_payment/", {
         id: this.$route.query.token,
       })
       .then((response) => {
@@ -121,7 +121,7 @@ export default {
         this.order_id = this.$route.query.token;
         console.log(response);
         axios
-          .post("http://localhost:8000/register_order/", {
+          .post("/register_order/", {
             id: this.$route.query.token,
           })
           .then((response) => {

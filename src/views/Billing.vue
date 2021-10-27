@@ -86,6 +86,7 @@
                 v-model="state"
                 :country="country"
                 :region="region"
+                regionName=true
                 class="w-full px-2 py-2 h-12 text-gray-700 bg-gray-200 rounded"
               />
             </div>
@@ -134,8 +135,7 @@
   </div>
 </template>
 <script>
-// import {watch} from "vue"
-import axios from "@/axios";
+// import axios from "@/axios";
 
 /* eslint-disable */
 // @ is an alias to /src
@@ -187,23 +187,24 @@ export default {
       }
     },
     paypalLink() {
-      axios
-        .post("http://localhost:8000/paypal_payment", {
-          cart: JSON.parse(this.$store.getters.getCart),
-          billing: {
-            name: this.name,
-            zip_code: this.zip_code,
-            address_line: this.address_line,
-            state: this.state,
-            country: this.country,
-            email: this.email,
-            city: this.city,
-          }
-        })
-        .then((response) => {
-          //   console.log(response.data.paypal_link)
-          window.location.href = response.data.paypal_link;
-        });
+      console.log(this.state)
+      // axios
+      //   .post("/paypal_payment", {
+      //     cart: JSON.parse(this.$store.getters.getCart),
+      //     billing: {
+      //       name: this.name,
+      //       zip_code: this.zip_code,
+      //       address_line: this.address_line,
+      //       state: this.state,
+      //       country: this.country,
+      //       email: this.email,
+      //       city: this.city,
+      //     }
+      //   })
+      //   .then((response) => {
+      //     //   console.log(response.data.paypal_link)
+      //     window.location.href = response.data.paypal_link;
+      //   });
     }
     //     this.cartdata.items.forEach(element => {
     //         this.amount[element.id]=element.amount

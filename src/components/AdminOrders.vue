@@ -323,10 +323,12 @@
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text text-gray-900">
-                      {{ order.tracking_number }}1M909190GG401504X
+                      {{ order.tracking_number }}
                       <a
                         @click="toggle_edit(order.id)"
                         class="
+                        invisible
+                        lg:visible
                           inline-flex
                           cursor-pointer
                           items-center
@@ -461,7 +463,7 @@
                       font-medium
                     "
                   >
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
+                    <a @click="goToAdminOrder(order.order_id)" class="text-indigo-600 hover:text-indigo-900"
                       >Edit</a
                     >
                   </td>
@@ -504,6 +506,9 @@ export default {
     };
   },
   methods: {
+    goToAdminOrder(order_id){
+           this.$router.push({ path: `/admin/order/${order_id}/` });
+    },
     toggle_show_tracking(){
 this.showEditTracking=!this.showEditTracking
     },

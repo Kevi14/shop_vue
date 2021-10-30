@@ -9,7 +9,7 @@
 
       <div
         class="
-        mt-10
+          mt-10
           px-4
           space-y-2
           sm:px-0 sm:flex sm:items-baseline sm:justify-between sm:space-y-0
@@ -36,69 +36,65 @@
         </p>
       </div>
       <div class="flex items-center justify-center">
-      <section
-        aria-labelledby="products-heading"
-        class="mt-6 flex"
-       
-      >
-        <h2 id="products-heading" class="sr-only">Products purchased</h2>
-  
-        <div class="space-y-8">
-          <div
-            class="
-              bg-white
-              border-t border-b border-gray-200
-              shadow-sm
-              sm:border sm:rounded-lg
-            "
-          >
+        <section aria-labelledby="products-heading" class="mt-6 flex">
+          <h2 id="products-heading" class="sr-only">Products purchased</h2>
+
+          <div class="space-y-8">
             <div
               class="
-                py-6
-                px-4
-                sm:px-6
-
+                bg-white
+                border-t border-b border-gray-200
+                shadow-sm
+                sm:border sm:rounded-lg
               "
             >
-              <div class="sm:flex lg:col-span-7">
-                
-        
-   
-                <dl class="grid grid-cols-2 gap-x-6 text-sm ">
-                  <div>
-                    <dt class="font-large text-gray-900">Delivery address</dt>
-                    <dd class="mt-3 text-gray-500">
-                      <span class="block">Floyd Miles</span>
-                      <span class="block">7363 Cynthia Pass</span>
-                      <span class="block">Toronto, ON N3Y 4H8</span>
-                                            <span class="block"> <p class="inline text-black"> Test : </p> {{order_data[0]}}</span>
-                      <span class="block"> <p class="inline text-black"> State : </p> {{order_data[0].state}}</span>
-                      <span class="block"> <p class="inline text-black"> City : </p> {{order_data[0].city}}</span>
-                      <span class="block"> <p class="inline text-black"> Address line 1 : </p> {{order_data[0].adress_line}}</span>
-                       <span class="block"> <p class="inline text-black"> Zip Code : </p> {{order_data[0].zip_code}}</span>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt class="font-large text-gray-900">Shipping updates</dt>
-                    <dd class="mt-3 text-gray-500 space-y-3">
-                      <p> {{order_data[0].contact_email}}</p>
-                    </dd>
-                  </div>
-                </dl>
+              <div class="py-6 px-4 sm:px-6">
+                <div class="sm:flex lg:col-span-7">
+                  <dl class="grid grid-cols-2 gap-x-6 text-sm">
+                    <div>
+                      <dt class="font-large text-gray-900">Delivery address</dt>
+                      <dd class="mt-3 text-gray-500">
+                        <span class="block">Floyd Miles</span>
+                        <span class="block">7363 Cynthia Pass</span>
+                        <span class="block">Toronto, ON N3Y 4H8</span>
+                        <span class="block">
+                          <p class="inline text-black">Test :</p>
+                          {{ order_data[0] }}</span
+                        >
+                        <span class="block">
+                          <p class="inline text-black">State :</p>
+                          {{ order_data[0].state }}</span
+                        >
+                        <span class="block">
+                          <p class="inline text-black">City :</p>
+                          {{ order_data[0].city }}</span
+                        >
+                        <span class="block">
+                          <p class="inline text-black">Address line 1 :</p>
+                          {{ order_data[0].adress_line }}</span
+                        >
+                        <span class="block">
+                          <p class="inline text-black">Zip Code :</p>
+                          {{ order_data[0].zip_code }}</span
+                        >
+                      </dd>
+                    </div>
+                    <div>
+                      <dt class="font-large text-gray-900">Shipping updates</dt>
+                      <dd class="mt-3 text-gray-500 space-y-3">
+                        <p>{{ order_data[0].contact_email }}</p>
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
               </div>
-    
-            
             </div>
+
+            <!-- More products... -->
           </div>
+        </section>
+      </div>
 
-          <!-- More products... -->
-        </div>
-      </section>
-</div>
-
-
-
-              
       <!-- Products -->
       <section
         aria-labelledby="products-heading"
@@ -137,8 +133,10 @@
                   "
                 >
                   <img
-                  
-                    :src="'https://res.cloudinary.com/hayehilhw/' + product.product.image"
+                    :src="
+                      'https://res.cloudinary.com/hayehilhw/' +
+                      product.product.image
+                    "
                     alt="Insulated bottle with white base and black snap lid."
                     class="
                       w-full
@@ -147,7 +145,6 @@
                       sm:w-full sm:h-full
                     "
                   />
-
                 </div>
 
                 <div class="mt-6 sm:mt-0 sm:ml-6">
@@ -160,13 +157,11 @@
                   <p class="mt-3 text-sm text-gray-500">
                     {{ product.product.description }}
                   </p>
-                   <h3 class="text-base font-medium text-gray-900 mt-2">
+                  <h3 class="text-base font-medium text-gray-900 mt-2">
                     <a href="#"> Amount : {{ product.amount }}</a>
                   </h3>
                 </div>
               </div>
-
-            
             </div>
           </div>
 
@@ -183,17 +178,7 @@
               :style="`width: calc((${order_status_value} * 2 + 1) / 8 * 100%)`"
             ></div>
           </div>
-          <div
-            class="
-              hidden
-              sm:grid
-              grid-cols-4
-              text-sm
-              font-medium
-              text-gray-600
-              mt-6
-            "
-          >
+          <div class="grid grid-cols-4 text-sm font-medium text-gray-600 mt-6">
             <div class="text-indigo-600">Order placed</div>
             <div class="text-center text-indigo-600">Processing</div>
             <div class="text-center">Shipped</div>
@@ -201,56 +186,95 @@
           </div>
         </div>
       </div>
-            <!-- Tracking number div -->
+      <!-- Tracking number div -->
       <div class="flex justify-center items-center">
-      <button @click="toggleTrackingEdit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-10">
-  Add a tracking number
-</button>
-
-    
+        <button
+          @click="toggleTrackingEdit"
+          class="
+            bg-blue-500
+            hover:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+            mb-10
+          "
+        >
+          Add a tracking number
+        </button>
       </div>
-        <div class="flex items-center justify-center mb-4" v-if="tracking_edit">
-              <input      
-                          
-                          v-model="new_tracking_number"
-                          class="
-                            
-                            h-10
-                            pl-3
-                            pr-8
-                            
-                            text-base
-                            placeholder-gray-600
-                            border
-                            rounded-lg
-                            focus:shadow-outline
-                          "
-                          type="text"
-                          placeholder="Tracking Number"
-                        />
-                        
+      <div class="flex items-center justify-center mb-4" v-if="tracking_edit">
+        <input
+          v-model="new_tracking_number"
+          class="
+            h-10
+            pl-3
+            pr-8
+            text-base
+            placeholder-gray-600
+            border
+            rounded-lg
+            focus:shadow-outline
+          "
+          type="text"
+          placeholder="Tracking Number"
+        />
 
-  <div class="m-3">
-    <button class="bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
-      <span class="mr-2">Change</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-        <path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
-      </svg>
-    </button>
-  </div>
-
-
+        <div class="m-3">
+          <button
+            @click="changeTrackingNumber"
+            class="
+              bg-white
+              text-gray-800
+              font-bold
+              rounded
+              border-b-2 border-green-500
+              hover:border-green-600 hover:bg-green-500 hover:text-white
+              shadow-md
+              py-2
+              px-6
+              inline-flex
+              items-center
+            "
+          >
+            <span class="mr-2">Change</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentcolor"
+                d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
-                  <!-- Status div -->
+      <!-- Status div -->
       <div class="flex justify-center items-center">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-10">
-  Change status
-</button>
+        <button
+          class="
+            bg-blue-500
+            hover:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+            mb-10
+          "
+        >
+          Change status
+        </button>
       </div>
-      
+
       <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="bg-indigo-700">
         <div
+        
           class="
             max-w-2xl
             mx-auto
@@ -262,19 +286,70 @@
           "
         >
           <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-            <span class="block">Your tracking number.</span>
+            <span class="block">Your tracking number :</span>
             <!-- <span class="block">Start using Workflow today.</span> -->
           </h2>
-          <p class="mt-4 text-lg leading-6 text-indigo-200">
+          <p v-if="!order_data[0].tracking_number" class="mt-4 text-lg leading-6 text-white">
             Your tracking number has not been added yet. As soon as it does you
             will be able to view it here.
           </p>
+          
+           <div v-if="order_data[0].tracking_number" class="mt-4 text-lg leading-6 text-gray-50">
+            <h2 class="text-3xl">{{order_data[0].tracking_number}}</h2>
+          
+
+            
+           <p class="mt-3"> We suggest using parcelsapp for checking information upon your orders shipping details.</p>
+
+
+
+        <div class="m-3">
+          <button
+            @click="goToParcel"
+            class="
+              bg-white
+              text-gray-800
+              font-bold
+              rounded
+              border-b-2 border-green-500
+              hover:border-green-600 hover:bg-green-500 hover:text-white
+              shadow-md
+              py-2
+              px-6
+              inline-flex
+              items-center
+              mt-2
+            "
+          >
+            <span class="mr-2">Go to parcelsapp</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentcolor"
+                d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      
+
+          </div>
         </div>
       </div>
 
+
       <!-- Billing -->
     </main>
+
+<div class="parcels-widget-wrap " >
+    <iframe ref="iframeRef" class="parcels-widget w-full" value="" style="min-width: 312px;min-height: 210px;width: -moz-available;  width: -webkit-fill-available;" src="https://parcelsapp.com/widget" frameborder="no" seamless>
     
+    </iframe>
+</div>
   </div>
 </template>
 
@@ -294,11 +369,11 @@ export default {
       exists: false,
       not_found: false,
       product_data: [],
-      loading:false,
-      order_data:null,
-      order_status_value:null,
-      tracking_edit:false,
-      new_tracking_number:null,
+      loading: false,
+      order_data: null,
+      order_status_value: null,
+      tracking_edit: false,
+      new_tracking_number: null
       //   people,
       // cartdata : computed(()=>JSON.parse(this.$store.getters.getCart)),
       //       seen: false,
@@ -307,41 +382,49 @@ export default {
   },
 
   methods: {
-    toggleTrackingEdit(){
-this.tracking_edit = ! this.tracking_edit
+    goToParcel(){
+     console.log( this.$refs.iframeRef  );
+      // window.open("https://parcelsapp.com/en")
+      
     },
-    changeTrackingNumber(tracking_num){
-      this.$store.dispatch('refreshToken')
+    toggleTrackingEdit() {
+      this.tracking_edit = !this.tracking_edit;
+    },
+    changeTrackingNumber() {
+      this.$store.dispatch("refreshToken");
       let config = {
-        headers: {
-          Authorization: `Bearer ${this.$store.state.accessToken}`
-        }};
-
-        axios.patch(`orders/${this.order_data[0].id}/`,{tracking_number :tracking_num},config)
-    },
-    getOrderDetails(order_id){
-      this.$store.dispatch('refreshToken')
-           let config = {
         headers: {
           Authorization: `Bearer ${this.$store.state.accessToken}`
         }
       };
-  axios.get(`/orders/?order_id=${order_id}`, config).then((response) => {
+      axios.patch(
+        `orders/${this.order_data[0].id}/`,
+        { tracking_number: this.new_tracking_number },
+        config
+      );
+    },
+    getOrderDetails(order_id) {
+      this.$store.dispatch("refreshToken");
+      let config = {
+        headers: {
+          Authorization: `Bearer ${this.$store.state.accessToken}`
+        }
+      };
+      axios.get(`/orders/?order_id=${order_id}`, config).then((response) => {
         this.order_data = response.data;
-        if(this.order_data[0].status ==="Processing"){
-          this.order_status_value=1
+        if (this.order_data[0].status === "Processing") {
+          this.order_status_value = 1;
         }
-                if(this.order_data[0].status ==="Shipped"){
-          this.order_status_value=2
+        if (this.order_data[0].status === "Shipped") {
+          this.order_status_value = 2;
         }
-                if(this.order_data[0].status ==="Delivered"){
-          this.order_status_value=4
+        if (this.order_data[0].status === "Delivered") {
+          this.order_status_value = 4;
         }
-        
-        })
+      });
     },
     async getItemsOrderDetails(order_id) {
-      this.loading= true
+      this.loading = true;
       await axios
         .get(`/items_ordered/?order_id=${order_id}`)
         .then((response) => {
@@ -356,14 +439,12 @@ this.tracking_edit = ! this.tracking_edit
           }
         });
       // console.log(this.search);
-    },
-
+    }
   },
-  mounted(){
-    this.getItemsOrderDetails(this.$route.params.id)
+  mounted() {
+    this.getItemsOrderDetails(this.$route.params.id);
     // console.log(this.$route.params.id)
-    this.getOrderDetails(this.$route.params.id)
+    this.getOrderDetails(this.$route.params.id);
   }
-  
 };
 </script>

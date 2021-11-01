@@ -272,8 +272,11 @@
         </button>
       </div>
          <div class="flex items-center justify-center mb-4 " v-if="status_edit">
+
+
         <select
-          v-model="new_tracking_number"
+        autocomplete="off"
+          v-model="status"
           class="
             h-10
             pl-3
@@ -285,10 +288,11 @@
             focus:shadow-outline
           "
           placeholder="Status"
+          
         >
-          <option value="processing" selected="selected">Processing</option>
-  <option value="shipped">Shipped</option>
-  <option value="delivered">Delivered</option>
+          <option value="Processing" selected="selected">Processing</option>
+  <option value="Shipped">Shipped</option>
+  <option value="Delivered">Delivered</option>
 
         </select>
         <div class="m-3">
@@ -343,13 +347,13 @@
             <span class="block">Your tracking number :</span>
             <!-- <span class="block">Start using Workflow today.</span> -->
           </h2>
-          <p v-if="!order_data[0].tracking_number" class="mt-4 text-lg leading-6 text-white">
+          <p v-if="!tracking_number" class="mt-4 text-lg leading-6 text-white">
             Your tracking number has not been added yet. As soon as it does you
             will be able to view it here.
           </p>
           
-           <div v-if="order_data[0].tracking_number" class="mt-4 text-lg leading-6 text-gray-50">
-            <h2 class="text-3xl">{{order_data[0].tracking_number}}</h2>
+           <div v-if="tracking_number" class="mt-4 text-lg leading-6 text-gray-50">
+            <h2 class="text-3xl">{{tracking_number}}</h2>
           
 
             
@@ -423,8 +427,10 @@ export default {
       order_data: null,
       order_status_value: null,
       tracking_edit: false,
+      tracking_number:null,
       new_tracking_number: null,
       status_edit:false,
+      status:null,
       //   people,
       // cartdata : computed(()=>JSON.parse(this.$store.getters.getCart)),
       //       seen: false,
@@ -433,6 +439,21 @@ export default {
   },
 
   methods: {
+    changeStatus(){
+      this.$store.dispatch("refreshToken");
+      let config = {
+        headers: {
+          Authorization: `Bearer ${this.$store.state.accessToken}`
+        }
+      };
+      axios.patch(
+        `orders/${this.order_data[0].id}/`,
+        { status: this.status },
+        config
+      ).then(this.setOrderStatusNumber(this.status));
+      
+      
+    },
     goToParcel(){
       window.open("https://parcelsapp.com/en/tracking/"+this.order_data[0].tracking_number)
       
@@ -454,7 +475,20 @@ export default {
         `orders/${this.order_data[0].id}/`,
         { tracking_number: this.new_tracking_number },
         config
-      );
+      ).then(this.tracking_number=this.new_tracking_number).catch((err)=>{
+        
+      });
+    },
+    setOrderStatusNumber(status_to_check){
+ if (status_to_check === "Processing") {
+          this.order_status_value = 1;
+        }
+        if (status_to_check === "Shipped") {
+          this.order_status_value = 2;
+        }
+        if (status_to_check === "Delivered") {
+          this.order_status_value = 4;
+        }
     },
     getOrderDetails(order_id) {
       this.$store.dispatch("refreshToken");
@@ -465,16 +499,11 @@ export default {
       };
       axios.get(`/orders/?order_id=${order_id}`, config).then((response) => {
         this.order_data = response.data;
-        if (this.order_data[0].status === "Processing") {
-          this.order_status_value = 1;
-        }
-        if (this.order_data[0].status === "Shipped") {
-          this.order_status_value = 2;
-        }
-        if (this.order_data[0].status === "Delivered") {
-          this.order_status_value = 4;
-        }
+        this.status=this.order_data[0].status
+        this.tracking_number=this.order_data[0].tracking_number
+       this.setOrderStatusNumber(this.order_data[0].status)
       });
+
     },
     async getItemsOrderDetails(order_id) {
       this.loading = true;

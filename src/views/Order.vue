@@ -76,7 +76,7 @@
               sm:text-3xl
             "
           >
-            Order # {{ product_data[0].order }}
+            Order # {{ product_data[0].order.order_id }}
           </h1>
         </div>
         <p class="text-sm text-gray-600">
@@ -203,9 +203,10 @@
         </div>
       </div>
 
-      <!-- This example requires Tailwind CSS v2.0+ -->
+     <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="bg-indigo-700">
         <div
+        
           class="
             max-w-2xl
             mx-auto
@@ -217,15 +218,59 @@
           "
         >
           <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-            <span class="block">Your tracking number.</span>
+            <span class="block">Your tracking number :</span>
             <!-- <span class="block">Start using Workflow today.</span> -->
           </h2>
-          <p class="mt-4 text-lg leading-6 text-indigo-200">
+          <p v-if="!product_data[0].order.tracking_number" class="mt-4 text-lg leading-6 text-white">
             Your tracking number has not been added yet. As soon as it does you
             will be able to view it here.
           </p>
+          
+           <div v-if="product_data[0].order.tracking_number" class="mt-4 text-lg leading-6 text-gray-50">
+            <h2 class="text-3xl">{{product_data[0].order.tracking_number}}</h2>
+          
+
+            
+           <p class="mt-3"> We suggest using parcelsapp for checking information upon your orders shipping details.</p>
+
+
+
+        <div class="m-3">
+          <button
+            @click="goToParcel"
+            class="
+              bg-white
+              text-gray-800
+              font-bold
+              rounded
+              border-b-2 border-green-500
+              hover:border-green-600 hover:bg-green-500 hover:text-white
+              shadow-md
+              py-2
+              px-6
+              inline-flex
+              items-center
+              mt-2
+            "
+          >
+            <span class="mr-2">Go to parcelsapp</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentcolor"
+                d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+              ></path>
+            </svg>
+          </button>
         </div>
-      </div>
+        </div>
+        </div>
+        </div>
+  
 
       <!-- Billing -->
     </main>
@@ -257,11 +302,14 @@ export default {
   },
 
   methods: {
+     goToParcel(){
+      window.open("https://parcelsapp.com/en/tracking/"+this.order_data[0].tracking_number)
+      
+    },
     async searchForProduct() {
       await axios
         .get(`/items_ordered/?order_id=${this.search.replace(/\s+/g, "")}`)
         .then((response) => {
-          console.log(response.data);
           if (response.data.length !== 0) {
             this.exists = true;
             // console.log(response.data[0].order_id);

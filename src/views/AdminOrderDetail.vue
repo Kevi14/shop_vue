@@ -25,7 +25,7 @@
               sm:text-3xl
             "
           >
-            Order # {{ product_data[0].order }}
+            Order # {{ order_data[0].order_id }}
           </h1>
         </div>
         <p class="text-sm text-gray-600">
@@ -256,6 +256,7 @@
       <!-- Status div -->
       <div class="flex justify-center items-center">
         <button
+        @click="showStatusEdit"
           class="
             bg-blue-500
             hover:bg-blue-700
@@ -264,12 +265,65 @@
             py-2
             px-4
             rounded
-            mb-10
+            mb-4
           "
         >
           Change status
         </button>
       </div>
+         <div class="flex items-center justify-center mb-4 " v-if="status_edit">
+        <select
+          v-model="new_tracking_number"
+          class="
+            h-10
+            pl-3
+            pr-8
+            text-base
+            placeholder-gray-600
+            border
+            rounded-lg
+            focus:shadow-outline
+          "
+          placeholder="Status"
+        >
+          <option value="processing" selected="selected">Processing</option>
+  <option value="shipped">Shipped</option>
+  <option value="delivered">Delivered</option>
+
+        </select>
+        <div class="m-3">
+          <button
+            @click="changeStatus"
+            class="
+              bg-white
+              text-gray-800
+              font-bold
+              rounded
+              border-b-2 border-green-500
+              hover:border-green-600 hover:bg-green-500 hover:text-white
+              shadow-md
+              py-2
+              px-6
+              inline-flex
+              items-center
+            "
+          >
+            <span class="mr-2">Change</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentcolor"
+                d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
 
       <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="bg-indigo-700">
@@ -345,11 +399,7 @@
       <!-- Billing -->
     </main>
 
-<div class="parcels-widget-wrap " >
-    <iframe ref="iframeRef" class="parcels-widget w-full" value="" style="min-width: 312px;min-height: 210px;width: -moz-available;  width: -webkit-fill-available;" src="https://parcelsapp.com/widget" frameborder="no" seamless>
-    
-    </iframe>
-</div>
+
   </div>
 </template>
 
@@ -373,7 +423,8 @@ export default {
       order_data: null,
       order_status_value: null,
       tracking_edit: false,
-      new_tracking_number: null
+      new_tracking_number: null,
+      status_edit:false,
       //   people,
       // cartdata : computed(()=>JSON.parse(this.$store.getters.getCart)),
       //       seen: false,
@@ -383,12 +434,14 @@ export default {
 
   methods: {
     goToParcel(){
-     console.log( this.$refs.iframeRef  );
-      // window.open("https://parcelsapp.com/en")
+      window.open("https://parcelsapp.com/en/tracking/"+this.order_data[0].tracking_number)
       
     },
     toggleTrackingEdit() {
       this.tracking_edit = !this.tracking_edit;
+    },
+     showStatusEdit() {
+      this.status_edit = !this.status_edit;
     },
     changeTrackingNumber() {
       this.$store.dispatch("refreshToken");

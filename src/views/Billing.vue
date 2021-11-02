@@ -85,7 +85,6 @@
               <region-select
                 v-model="state"
                 :country="country"
-                :region="region"
                 regionName=true
                 class="w-full px-2 py-2 h-12 text-gray-700 bg-gray-200 rounded"
               />
@@ -126,6 +125,33 @@
                 Pay with paypal
               </button>
             </div>
+              
+<div class="flex justify-center items-center mt-4"  v-if="loading">
+      <div
+        style="border-top-color: transparent"
+        class="
+          w-16
+          h-16
+          border-4 border-blue-400 border-solid
+          rounded-full
+          animate-spin
+        "
+      >     
+
+</div>
+</div>
+<div class="flex justify-center items-center " v-if="loading">
+<p> Please wait we are redirecting you to Paypal to make your payment.  </p>
+</div>
+
+<div class="flex justify-center items-center mt-4" v-if="error">
+<p> Something went wrong please check if all the above fields are correct.  </p>
+</div>
+  
+    
+
+
+            
           </form>
         </div>
       </div>
@@ -135,7 +161,7 @@
   </div>
 </template>
 <script>
-// import axios from "@/axios";
+import axios from "@/axios";
 
 /* eslint-disable */
 // @ is an alias to /src
@@ -162,7 +188,9 @@ export default {
       zip_code: null,
       address_line: null,
       state: null,
-      country: null
+      country: null,
+      loading:false,
+      error:false,
       //   people,
       // cartdata : computed(()=>JSON.parse(this.$store.getters.getCart)),
       //       seen: false,
@@ -186,25 +214,29 @@ export default {
         console.log("A")
       }
     },
-    paypalLink() {
-      console.log(this.state)
-      // axios
-      //   .post("/paypal_payment", {
-      //     cart: JSON.parse(this.$store.getters.getCart),
-      //     billing: {
-      //       name: this.name,
-      //       zip_code: this.zip_code,
-      //       address_line: this.address_line,
-      //       state: this.state,
-      //       country: this.country,
-      //       email: this.email,
-      //       city: this.city,
-      //     }
-      //   })
-      //   .then((response) => {
-      //     //   console.log(response.data.paypal_link)
-      //     window.location.href = response.data.paypal_link;
-      //   });
+    async paypalLink() {
+      this.error=false;
+      this.loading=true;
+      await axios
+        .post("/paypal_payment", {
+          cart: JSON.parse(this.$store.getters.getCart),
+          billing: {
+            name: this.name,
+            zip_code: this.zip_code,
+            address_line: this.address_line,
+            state: this.state,
+            country: this.country,
+            email: this.email,
+            city: this.city,
+          }
+        })
+        .then((response) => {
+          this.loading=false;
+          window.location.href = response.data.paypal_link;
+        }).catch( (err) => {this.loading=false;
+        this.error=true;
+        });
+        this.loading=false;
     }
     //     this.cartdata.items.forEach(element => {
     //         this.amount[element.id]=element.amount

@@ -85,7 +85,7 @@
               <region-select
                 v-model="state"
                 :country="country"
-                regionName=true
+                regionName="true"
                 class="w-full px-2 py-2 h-12 text-gray-700 bg-gray-200 rounded"
               />
             </div>
@@ -125,33 +125,32 @@
                 Pay with paypal
               </button>
             </div>
-              
-<div class="flex justify-center items-center mt-4"  v-if="loading">
-      <div
-        style="border-top-color: transparent"
-        class="
-          w-16
-          h-16
-          border-4 border-blue-400 border-solid
-          rounded-full
-          animate-spin
-        "
-      >     
 
-</div>
-</div>
-<div class="flex justify-center items-center " v-if="loading">
-<p> Please wait we are redirecting you to Paypal to make your payment.  </p>
-</div>
+            <div class="flex justify-center items-center mt-4" v-if="loading">
+              <div
+                style="border-top-color: transparent"
+                class="
+                  w-16
+                  h-16
+                  border-4 border-blue-400 border-solid
+                  rounded-full
+                  animate-spin
+                "
+              ></div>
+            </div>
+            <div class="flex justify-center items-center" v-if="loading">
+              <p>
+                Please wait we are redirecting you to Paypal to make your
+                payment.
+              </p>
+            </div>
 
-<div class="flex justify-center items-center mt-4" v-if="error">
-<p> Something went wrong please check if all the above fields are correct.  </p>
-</div>
-  
-    
-
-
-            
+            <div class="flex justify-center items-center mt-4" v-if="error">
+              <p>
+                Something went wrong please check if all the above fields are
+                correct.
+              </p>
+            </div>
           </form>
         </div>
       </div>
@@ -189,34 +188,34 @@ export default {
       address_line: null,
       state: null,
       country: null,
-      loading:false,
-      error:false,
+      loading: false,
+      error: false
       //   people,
       // cartdata : computed(()=>JSON.parse(this.$store.getters.getCart)),
       //       seen: false,
       //       menu:false
     };
   },
-  watch:{
-    country(newCountry){
-      if(newCountry==="United States"){
-        console.log("A")
+  watch: {
+    country(newCountry) {
+      if (newCountry === "United States") {
+        console.log("A");
       }
     }
   },
 
   methods: {
-    ls(){
-      console.log(this.country)
+    ls() {
+      console.log(this.country);
     },
-    changeState(){
-      if(this.country=='US'){
-        console.log("A")
+    changeState() {
+      if (this.country == "US") {
+        console.log("A");
       }
     },
     async paypalLink() {
-      this.error=false;
-      this.loading=true;
+      this.error = false;
+      this.loading = true;
       await axios
         .post("/paypal_payment", {
           cart: JSON.parse(this.$store.getters.getCart),
@@ -227,16 +226,18 @@ export default {
             state: this.state,
             country: this.country,
             email: this.email,
-            city: this.city,
+            city: this.city
           }
         })
         .then((response) => {
-          this.loading=false;
+          this.loading = false;
           window.location.href = response.data.paypal_link;
-        }).catch( (err) => {this.loading=false;
-        this.error=true;
+        })
+        .catch((err) => {
+          this.loading = false;
+          this.error = true;
         });
-        this.loading=false;
+      this.loading = false;
     }
     //     this.cartdata.items.forEach(element => {
     //         this.amount[element.id]=element.amount
@@ -249,12 +250,9 @@ export default {
 };
 </script>
 <style scoped>
-.about{
-
+.about {
   background-image: url("../assets/imazh2.jpg");
-    background-size: 1000px;
-    /* background-repeat: no-repeat; */
-
+  background-size: 1000px;
+  /* background-repeat: no-repeat; */
 }
 </style>
-

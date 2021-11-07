@@ -86,7 +86,28 @@
           >
         </p>
       </div>
-
+      <div
+        class="
+          bg-white
+          border-t border-b border-gray-200
+          shadow-sm
+          sm:border sm:rounded-lg
+        "
+      >
+        <div class="py-6 px-4 sm:px-6">
+          <div class="sm:flex lg:col-span-7 flex items-center justify-center">
+            <dl class="">
+              <div>
+                <dt class="font-large text-gray-900">Shipping details:</dt>
+                <dd class="mt-3 text-gray-500 space-y-3">
+                  {{ email }}
+                  <!-- <p>{{ order_data[0].contact_email }}</p> -->
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
       <!-- Products -->
       <section
         aria-labelledby="products-heading"
@@ -125,7 +146,10 @@
                   "
                 >
                   <img
-                    :src="product.product.get_image"
+                    :src="
+                      'https://res.cloudinary.com/hayehilhw/' +
+                      product.product.image
+                    "
                     alt="Insulated bottle with white base and black snap lid."
                     class="
                       w-full
@@ -147,26 +171,6 @@
                     {{ product.product.description }}
                   </p>
                 </div>
-              </div>
-
-              <div class="mt-6 lg:mt-0 lg:col-span-5">
-                <dl class="grid grid-cols-2 gap-x-6 text-sm">
-                  <div>
-                    <dt class="font-medium text-gray-900">Delivery address</dt>
-                    <dd class="mt-3 text-gray-500">
-                      <span class="block">Floyd Miles</span>
-                      <span class="block">7363 Cynthia Pass</span>
-                      <span class="block">Toronto, ON N3Y 4H8</span>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt class="font-medium text-gray-900">Shipping updates</dt>
-                    <dd class="mt-3 text-gray-500 space-y-3">
-                      <p>f•••@example.com</p>
-                      <p>1•••••••••40</p>
-                    </dd>
-                  </div>
-                </dl>
               </div>
             </div>
           </div>
@@ -203,10 +207,9 @@
         </div>
       </div>
 
-     <!-- This example requires Tailwind CSS v2.0+ -->
+      <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="bg-indigo-700">
         <div
-        
           class="
             max-w-2xl
             mx-auto
@@ -221,56 +224,62 @@
             <span class="block">Your tracking number :</span>
             <!-- <span class="block">Start using Workflow today.</span> -->
           </h2>
-          <p v-if="!product_data[0].order.tracking_number" class="mt-4 text-lg leading-6 text-white">
+          <p
+            v-if="!product_data[0].order.tracking_number"
+            class="mt-4 text-lg leading-6 text-white"
+          >
             Your tracking number has not been added yet. As soon as it does you
             will be able to view it here.
           </p>
-          
-           <div v-if="product_data[0].order.tracking_number" class="mt-4 text-lg leading-6 text-gray-50">
-            <h2 class="text-3xl">{{product_data[0].order.tracking_number}}</h2>
-          
 
-            
-           <p class="mt-3"> We suggest using parcelsapp for checking information upon your orders shipping details.</p>
-
-
-
-        <div class="m-3">
-          <button
-            @click="goToParcel"
-            class="
-              bg-white
-              text-gray-800
-              font-bold
-              rounded
-              border-b-2 border-green-500
-              hover:border-green-600 hover:bg-green-500 hover:text-white
-              shadow-md
-              py-2
-              px-6
-              inline-flex
-              items-center
-              mt-2
-            "
+          <div
+            v-if="product_data[0].order.tracking_number"
+            class="mt-4 text-lg leading-6 text-gray-50"
           >
-            <span class="mr-2">Go to parcelsapp</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentcolor"
-                d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
-              ></path>
-            </svg>
-          </button>
+            <h2 class="text-3xl">
+              {{ product_data[0].order.tracking_number }}
+            </h2>
+
+            <p class="mt-3">
+              We suggest using parcelsapp for checking information upon your
+              orders shipping details.
+            </p>
+
+            <div class="m-3">
+              <button
+                @click="goToParcel"
+                class="
+                  bg-white
+                  text-gray-800
+                  font-bold
+                  rounded
+                  border-b-2 border-green-500
+                  hover:border-green-600 hover:bg-green-500 hover:text-white
+                  shadow-md
+                  py-2
+                  px-6
+                  inline-flex
+                  items-center
+                  mt-2
+                "
+              >
+                <span class="mr-2">Go to parcelsapp</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentcolor"
+                    d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
-        </div>
-        </div>
-        </div>
-  
+      </div>
 
       <!-- Billing -->
     </main>
@@ -293,6 +302,7 @@ export default {
       exists: false,
       not_found: false,
       product_data: [],
+      email: null
 
       //   people,
       // cartdata : computed(()=>JSON.parse(this.$store.getters.getCart)),
@@ -302,9 +312,11 @@ export default {
   },
 
   methods: {
-     goToParcel(){
-      window.open("https://parcelsapp.com/en/tracking/"+this.order_data[0].tracking_number)
-      
+    goToParcel() {
+      window.open(
+        "https://parcelsapp.com/en/tracking/" +
+          this.order_data[0].tracking_number
+      );
     },
     async searchForProduct() {
       await axios
@@ -319,8 +331,9 @@ export default {
             this.not_found = true;
           }
         });
-      // console.log(this.search);
-    },
-  },
+      let email = this.product_data[0].order.contact_email.split("@");
+      this.email = email[0].slice(0, 3) + "*".repeat(8) + email[1];
+    }
+  }
 };
 </script>

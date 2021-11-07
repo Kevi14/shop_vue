@@ -3,8 +3,9 @@ import Home from "../views/Home.vue";
 import AdminLogin from "../views/AdminLogin.vue";
 import Admin from "../views/Admin.vue";
 import ProductDetail from "../views/ProductDetail.vue";
-import CheckoutPage from "../views/CheckoutPage.vue";
+// import CheckoutPage from "../views/CheckoutPage.vue";
 import Billing from "../views/Billing.vue";
+import ShoppingCart from "../views/ShoppingCart.vue";
 import PaymentSuccessful from "../views/PaymentSuccessful.vue";
 import Order from "../views/Order.vue";
 import NotFound from "../views/NotFound.vue";
@@ -45,7 +46,7 @@ const routes = [
   {
     path: "/checkout/",
     name: "checkout",
-    component: CheckoutPage,
+    component: ShoppingCart,
   },
   {
     path: "/billing/",

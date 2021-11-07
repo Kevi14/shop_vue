@@ -327,8 +327,8 @@
                       <a
                         @click="toggle_edit(order.id)"
                         class="
-                        invisible
-                        lg:visible
+                          invisible
+                          lg:visible
                           inline-flex
                           cursor-pointer
                           items-center
@@ -448,7 +448,7 @@
                         text-green-800
                       "
                     >
-                      Shipped
+                      {{ order.status }}
                     </span>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -461,9 +461,12 @@
                       whitespace-nowrap
                       text-right text-sm
                       font-medium
+                      cursor-pointer
                     "
                   >
-                    <a @click="goToAdminOrder(order.order_id)" class="text-indigo-600 hover:text-indigo-900"
+                    <a
+                      @click="goToAdminOrder(order.order_id)"
+                      class="text-indigo-600 hover:text-indigo-900"
                       >Edit</a
                     >
                   </td>
@@ -489,38 +492,37 @@ import EditTrackingNumber from "@/components/EditTrackingNumber.vue";
 export default {
   /* eslint-disable */
   name: "AdminOrders",
-    components: {
-    EditTrackingNumber,
+  components: {
+    EditTrackingNumber
   },
   data: function () {
     return {
-      showEditTracking:false,
+      showEditTracking: false,
       search: null,
       exists: false,
       not_found: false,
       orders_data: [],
-      countries_filter:[],
-      loading:false,
-      edit:[],
-      tracking_n:[],
+      countries_filter: [],
+      loading: false,
+      edit: [],
+      tracking_n: []
     };
   },
   methods: {
-    goToAdminOrder(order_id){
-           this.$router.push({ path: `/admin/order/${order_id}/` });
+    goToAdminOrder(order_id) {
+      this.$router.push({ path: `/admin/order/${order_id}/` });
     },
-    toggle_show_tracking(){
-this.showEditTracking=!this.showEditTracking
+    toggle_show_tracking() {
+      this.showEditTracking = !this.showEditTracking;
     },
-    toggle_edit(id){
-      this.edit[id]=!this.edit[id]
-
+    toggle_edit(id) {
+      this.edit[id] = !this.edit[id];
     },
-    save_tracking(id){
-console.log(this.tracking_n[id])
+    save_tracking(id) {
+      console.log(this.tracking_n[id]);
     },
     async getOrders() {
-    this.loading=true
+      this.loading = true;
       await this.$store.dispatch("refreshToken");
       let config = {
         headers: {
@@ -530,14 +532,14 @@ console.log(this.tracking_n[id])
 
       await axios.get(`/orders/`, config).then((response) => {
         this.orders_data = response.data;
-      response.data.forEach(element => {
-        if (!this.countries_filter.includes(element.country)){
-          this.countries_filter.push(element.country)
-        } 
-          console.log(this.countries_filter)
+        response.data.forEach((element) => {
+          if (!this.countries_filter.includes(element.country)) {
+            this.countries_filter.push(element.country);
+          }
+          console.log(this.countries_filter);
         });
       });
-      this.loading=false
+      this.loading = false;
     }
   },
   mounted() {

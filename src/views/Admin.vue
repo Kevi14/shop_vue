@@ -23,6 +23,7 @@
           @click="openProducts"
           :class="this.shopAdminVisible ? 'text-gray-900' : ''"
           class="
+            cursor-pointer
             text-gray-500
             rounded-l-lg
             group
@@ -53,6 +54,7 @@
           @click="openOrder"
           :class="this.adminOrdersVisible ? 'text-gray-900' : ''"
           class="
+            cursor-pointer
             text-gray-500
             hover:text-gray-700
             group

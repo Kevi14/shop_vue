@@ -64,6 +64,9 @@ const administration = createStore({
     },
   },
   actions: {
+    emptyCart(context) {
+      context.state.cart.items = [];
+    },
     userLogout(context) {
       if (context.getters.loggedIn) {
         context.commit("destroyToken");

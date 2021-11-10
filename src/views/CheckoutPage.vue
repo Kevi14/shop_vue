@@ -206,31 +206,44 @@ export default {
       amount: [],
       decks: [],
       cart: null,
+      total: 0,
       //   people,
       cartdata: computed(() => JSON.parse(this.$store.getters.getCart))
       //       seen: false,
       //       menu:false
     };
   },
+  computed: {
+    calcSum() {
+      let total = 0;
+      this.cartdata.forEach((product) => {
+        total += product.price * product.amount;
+      });
+      return total;
+    },
 
-  methods: {
-    goToBilling() {
-      this.$router.push({ name: "billing" });
+    methods: {
+      goToBilling() {
+        this.$router.push({ name: "billing" });
+      },
+      changeAmount(id) {
+        this.$store.dispatch("updateAmount", {
+          id: id,
+          amount: this.amount[id]
+        });
+      },
+      removeFromCartf(id) {
+        this.$store.dispatch("removeFromCart", { id: id });
+      }
     },
-    changeAmount(id) {
-      this.$store.dispatch("updateAmount", { id: id, amount: this.amount[id] });
-    },
-    removeFromCartf(id) {
-      this.$store.dispatch("removeFromCart", { id: id });
+    created() {
+      this.cartdata.items.forEach((element) => {
+        this.amount[element.id] = element.amount;
+      });
     }
-  },
-  created() {
-    this.cartdata.items.forEach((element) => {
-      this.amount[element.id] = element.amount;
-    });
-  }
-  //   components: {
+    //   components: {
 
-  //   },
+    //   },
+  }
 };
 </script>

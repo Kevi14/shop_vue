@@ -1,14 +1,5 @@
 <template>
-  <div
-    class="
-      home
-      bg-gradient-to-tr
-      from-red-300
-      to-yellow-200
-      h-screen
-      overflow-auto
-    "
-  >
+  <div class="home bg-white h-screen overflow-auto">
     <div
       class="pt-32 flex items-center justify-center overflow-auto"
       style="z-index: -100"

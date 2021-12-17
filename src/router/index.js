@@ -10,6 +10,7 @@ import PaymentSuccessful from "../views/PaymentSuccessful.vue";
 import Order from "../views/Order.vue";
 import NotFound from "../views/NotFound.vue";
 import AdminOrderDetail from "../views/AdminOrderDetail.vue";
+import ProductDetailAdmin from "../views/ProductDetailAdmin.vue";
 const routes = [
   {
     path: "/",
@@ -67,6 +68,14 @@ const routes = [
     path: "/admin/order/:id",
     name: "admin_order",
     component: AdminOrderDetail,
+    meta: {
+      requiresLogin: true,
+    },
+  },
+  {
+    path: "/admin/product/:id",
+    name: "admin_product",
+    component: ProductDetailAdmin,
     meta: {
       requiresLogin: true,
     },

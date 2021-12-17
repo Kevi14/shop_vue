@@ -54,7 +54,7 @@
             {{ deck.title }}
           </h3>
           <p class="mt-1 text-lg font-medium text-gray-900 dark:text-gray-900">
-            {{ deck.price }}
+            ${{ deck.price }}
           </p>
         </a>
 

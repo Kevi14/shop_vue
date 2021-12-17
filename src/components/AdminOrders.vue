@@ -15,21 +15,23 @@
               ></path>
             </svg>
           </div>
-
-          <input
-            type="text"
-            placeholder="Search by listing, location, bedroom number..."
-            class="
-              px-8
-              py-3
-              w-full
-              rounded-md
-              bg-gray-100
-              border-transparent
-              focus:border-gray-500 focus:bg-white focus:ring-0
-              text-sm
-            "
-          />
+          <form>
+            <input
+              v-model="name_to_search"
+              type="text"
+              placeholder="Search by name ,lastname ,email"
+              class="
+                px-8
+                py-3
+                w-full
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0
+                text-sm
+              "
+            />
+          </form>
         </div>
 
         <div class="flex items-center justify-between mt-4">
@@ -497,6 +499,7 @@ export default {
   },
   data: function () {
     return {
+      name_to_search: null,
       showEditTracking: false,
       search: null,
       exists: false,
@@ -538,6 +541,24 @@ export default {
           }
           console.log(this.countries_filter);
         });
+      });
+      this.loading = false;
+    },
+
+    async search_orders() {
+      this.loading = true;
+      await this.$store.dispatch("refreshToken");
+
+      let config = {
+        headers: {
+          Authorization: `Bearer ${this.$store.state.accessToken}`
+        }
+      };
+
+      await axios.get(`/orders/`, config).then((response) => {
+        this.orders_data = response.data;
+
+        // console.log(this.countries_filter);
       });
       this.loading = false;
     }

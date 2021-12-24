@@ -33,151 +33,6 @@
         Add a product
       </button>
     </div>
-    <div class="min-h-screen flex justify-center items-center py-20">
-      <!-- <button class="absolute top-32 right-8"> Asdasd</button> -->
-      <div
-        class="
-          md:px-4 md:grid md:grid-cols-2
-          lg:grid-cols-3
-          gap-20
-          space-y-4
-          md:space-y-0
-        "
-      >
-        <div
-          class="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg"
-          v-for="deck in decks"
-          :key="deck.id"
-        >
-          <h3 class="mb-3 text-xl font-bold text-black">
-            {{ deck.title }}
-            <!-- {deck.title} -->
-          </h3>
-          <div>
-            <img
-              class="w-full min-h-60 max-h-60 rounded-xl"
-              v-bind:src="'https://res.cloudinary.com/hayehilhw/' + deck.image"
-              alt="Colors"
-            />
-          </div>
-          <h1
-            @click="goToProduct(deck.id)"
-            class="mt-4 text-gray-800 text-3xl font-bold cursor-pointer"
-            style="word-wrap: break-word"
-          >
-            {{ deck.description }}
-          </h1>
-          <div class="my-4">
-            <div class="flex space-x-1 items-center">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-indigo-600 mb-1.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </span>
-              <p>1:34:23 Minutes</p>
-            </div>
-            <div class="flex space-x-1 items-center">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-indigo-600 mb-1.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-              </span>
-              <p>3 Parts</p>
-            </div>
-            <div class="flex space-x-1 items-center">
-              <!-- <span> -->
-              <img
-                src="https://www.svgrepo.com/show/5287/clover-cards.svg"
-                class="h-6 w-6 mb-1.5 text-indigo-600"
-              />
-              <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 mb-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> -->
-              <!-- <img src = 'https://www.svgrepo.com/show/5287/clover-cards.svg'> -->
-              <!-- <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /> -->
-              <!-- </svg> -->
-
-              <!-- </span> -->
-              <p>64</p>
-            </div>
-            <button
-              class="
-                mt-4
-                text-xl
-                w-full
-                text-white
-                bg-red-600
-                py-1.5
-                rounded-xl
-                shadow-lg
-              "
-              @click="showDeleteModalfunction()"
-            >
-              Delete
-            </button>
-            <button
-              @click="showEditModalfunction()"
-              class="
-                mt-4
-                text-xl
-                w-full
-                text-white
-                bg-blue-400
-                py-1.5
-                rounded-xl
-                shadow-lg
-              "
-            >
-              Update
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <DeleteProductModal
-        v-if="showDeleteModal"
-        @toggle-modal="hideDeleteModalfunction"
-        v-bind:idToChange="this.idToChange"
-      />
-      <EditProductModal
-        v-if="showEditModal"
-        @toggle-modal="hideEditModalfunction"
-        v-bind:idToChange="this.idToChange"
-      />
-      <AddProductModal
-        v-if="showAddModal"
-        @toggle-modal="toggleAddModalfunction"
-      />
-
-      <ToasterNotifications
-        @click="toggleToast"
-        v-if="toaster_visibility"
-        class="absolute top-0 mt-20 cursor-pointer"
-        @toggle_toaster="toggleToast"
-        v-bind:time="2000"
-        v-bind:type="type_of_toaster"
-      />
-    </div>
 
     <div
       class="
@@ -244,6 +99,29 @@
         <!-- More products... -->
       </div>
     </div>
+    <DeleteProductModal
+      v-if="showDeleteModal"
+      @toggle-modal="hideDeleteModalfunction"
+      v-bind:idToChange="this.idToChange"
+    />
+    <EditProductModal
+      v-if="showEditModal"
+      @toggle-modal="hideEditModalfunction"
+      v-bind:idToChange="this.idToChange"
+    />
+    <AddProductModal
+      v-if="showAddModal"
+      @toggle-modal="toggleAddModalfunction"
+    />
+
+    <ToasterNotifications
+      @click="toggleToast"
+      v-if="toaster_visibility"
+      class="absolute top-0 mt-20 cursor-pointer"
+      @toggle_toaster="toggleToast"
+      v-bind:time="2000"
+      v-bind:type="type_of_toaster"
+    />
   </div>
 </template>
 

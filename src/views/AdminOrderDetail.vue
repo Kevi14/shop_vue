@@ -256,7 +256,7 @@
       <!-- Status div -->
       <div class="flex justify-center items-center">
         <button
-        @click="showStatusEdit"
+          @click="showStatusEdit"
           class="
             bg-blue-500
             hover:bg-blue-700
@@ -271,11 +271,9 @@
           Change status
         </button>
       </div>
-         <div class="flex items-center justify-center mb-4 " v-if="status_edit">
-
-
+      <div class="flex items-center justify-center mb-4" v-if="status_edit">
         <select
-        autocomplete="off"
+          autocomplete="off"
           v-model="status"
           class="
             h-10
@@ -288,12 +286,10 @@
             focus:shadow-outline
           "
           placeholder="Status"
-          
         >
-          <option value="Processing" selected="selected">Processing</option>
-  <option value="Shipped">Shipped</option>
-  <option value="Delivered">Delivered</option>
-
+          <option value="processing" selected="selected">Processing</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
         </select>
         <div class="m-3">
           <button
@@ -327,12 +323,10 @@
           </button>
         </div>
       </div>
-      
 
       <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="bg-indigo-700">
         <div
-        
           class="
             max-w-2xl
             mx-auto
@@ -351,59 +345,56 @@
             Your tracking number has not been added yet. As soon as it does you
             will be able to view it here.
           </p>
-          
-           <div v-if="tracking_number" class="mt-4 text-lg leading-6 text-gray-50">
-            <h2 class="text-3xl">{{tracking_number}}</h2>
-          
 
-            
-           <p class="mt-3"> We suggest using parcelsapp for checking information upon your orders shipping details.</p>
-
-
-
-        <div class="m-3">
-          <button
-            @click="goToParcel"
-            class="
-              bg-white
-              text-gray-800
-              font-bold
-              rounded
-              border-b-2 border-green-500
-              hover:border-green-600 hover:bg-green-500 hover:text-white
-              shadow-md
-              py-2
-              px-6
-              inline-flex
-              items-center
-              mt-2
-            "
+          <div
+            v-if="tracking_number"
+            class="mt-4 text-lg leading-6 text-gray-50"
           >
-            <span class="mr-2">Go to parcelsapp</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentcolor"
-                d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      
+            <h2 class="text-3xl">{{ tracking_number }}</h2>
 
+            <p class="mt-3">
+              We suggest using parcelsapp for checking information upon your
+              orders shipping details.
+            </p>
+
+            <div class="m-3">
+              <button
+                @click="goToParcel"
+                class="
+                  bg-white
+                  text-gray-800
+                  font-bold
+                  rounded
+                  border-b-2 border-green-500
+                  hover:border-green-600 hover:bg-green-500 hover:text-white
+                  shadow-md
+                  py-2
+                  px-6
+                  inline-flex
+                  items-center
+                  mt-2
+                "
+              >
+                <span class="mr-2">Go to parcelsapp</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentcolor"
+                    d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-
       <!-- Billing -->
     </main>
-
-
   </div>
 </template>
 
@@ -427,10 +418,10 @@ export default {
       order_data: null,
       order_status_value: null,
       tracking_edit: false,
-      tracking_number:null,
+      tracking_number: null,
       new_tracking_number: null,
-      status_edit:false,
-      status:null,
+      status_edit: false,
+      status: null
       //   people,
       // cartdata : computed(()=>JSON.parse(this.$store.getters.getCart)),
       //       seen: false,
@@ -439,29 +430,31 @@ export default {
   },
 
   methods: {
-    changeStatus(){
+    changeStatus() {
       this.$store.dispatch("refreshToken");
       let config = {
         headers: {
           Authorization: `Bearer ${this.$store.state.accessToken}`
         }
       };
-      axios.patch(
-        `orders/${this.order_data[0].id}/`,
-        { status: this.status },
-        config
-      ).then(this.setOrderStatusNumber(this.status));
-      
-      
+      axios
+        .patch(
+          `orders/${this.order_data[0].id}/`,
+          { status: this.status },
+          config
+        )
+        .then(this.setOrderStatusNumber(this.status));
     },
-    goToParcel(){
-      window.open("https://parcelsapp.com/en/tracking/"+this.order_data[0].tracking_number)
-      
+    goToParcel() {
+      window.open(
+        "https://parcelsapp.com/en/tracking/" +
+          this.order_data[0].tracking_number
+      );
     },
     toggleTrackingEdit() {
       this.tracking_edit = !this.tracking_edit;
     },
-     showStatusEdit() {
+    showStatusEdit() {
       this.status_edit = !this.status_edit;
     },
     changeTrackingNumber() {
@@ -471,24 +464,25 @@ export default {
           Authorization: `Bearer ${this.$store.state.accessToken}`
         }
       };
-      axios.patch(
-        `orders/${this.order_data[0].id}/`,
-        { tracking_number: this.new_tracking_number },
-        config
-      ).then(this.tracking_number=this.new_tracking_number).catch((err)=>{
-        
-      });
+      axios
+        .patch(
+          `orders/${this.order_data[0].id}/`,
+          { tracking_number: this.new_tracking_number },
+          config
+        )
+        .then((this.tracking_number = this.new_tracking_number))
+        .catch((err) => {});
     },
-    setOrderStatusNumber(status_to_check){
- if (status_to_check === "Processing") {
-          this.order_status_value = 1;
-        }
-        if (status_to_check === "Shipped") {
-          this.order_status_value = 2;
-        }
-        if (status_to_check === "Delivered") {
-          this.order_status_value = 4;
-        }
+    setOrderStatusNumber(status_to_check) {
+      if (status_to_check === "processing") {
+        this.order_status_value = 1;
+      }
+      if (status_to_check === "shipped") {
+        this.order_status_value = 2;
+      }
+      if (status_to_check === "delivered") {
+        this.order_status_value = 4;
+      }
     },
     getOrderDetails(order_id) {
       this.$store.dispatch("refreshToken");
@@ -499,11 +493,10 @@ export default {
       };
       axios.get(`/orders/?order_id=${order_id}`, config).then((response) => {
         this.order_data = response.data;
-        this.status=this.order_data[0].status
-        this.tracking_number=this.order_data[0].tracking_number
-       this.setOrderStatusNumber(this.order_data[0].status)
+        this.status = this.order_data[0].status;
+        this.tracking_number = this.order_data[0].tracking_number;
+        this.setOrderStatusNumber(this.order_data[0].status);
       });
-
     },
     async getItemsOrderDetails(order_id) {
       this.loading = true;

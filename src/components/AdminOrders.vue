@@ -15,23 +15,23 @@
               ></path>
             </svg>
           </div>
-          <form>
-            <input
-              v-model="name_to_search"
-              type="text"
-              placeholder="Search by name ,lastname ,email"
-              class="
-                px-8
-                py-3
-                w-full
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-                text-sm
-              "
-            />
-          </form>
+
+          <input
+            v-on:keyup.enter="filter_database"
+            v-model="name_to_search"
+            type="text"
+            placeholder="Search by name ,lastname ,email"
+            class="
+              px-8
+              py-3
+              w-full
+              rounded-md
+              bg-gray-100
+              border-transparent
+              focus:border-gray-500 focus:bg-white focus:ring-0
+              text-sm
+            "
+          />
         </div>
 
         <div class="flex items-center justify-between mt-4">
@@ -47,6 +47,7 @@
               font-medium
               rounded-md
             "
+            @click="reset_filters"
           >
             Reset Filter
           </button>
@@ -67,14 +68,15 @@
                 focus:border-gray-500 focus:bg-white focus:ring-0
                 text-sm
               "
+              v-model="country_to_filter"
             >
-              <option value="">Country</option>
+              <option selected="selected" value="">Country</option>
               <option
                 v-for="countrie in countries_filter"
                 :value="countrie"
                 :key="countrie"
               >
-                {{ countrie }}
+                {{ capitalizeFirstLetter(countrie) }}
               </option>
             </select>
 
@@ -89,11 +91,12 @@
                 focus:border-gray-500 focus:bg-white focus:ring-0
                 text-sm
               "
+              v-model="status_to_filter"
             >
-              <option value="">Furnish Type</option>
-              <option value="fully-furnished">Fully Furnished</option>
-              <option value="partially-furnished">Partially Furnished</option>
-              <option value="not-furnished">Not Furnished</option>
+              <option value="">Status</option>
+              <option value="Processing">Processing</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
             </select>
 
             <select
@@ -135,65 +138,22 @@
               <option value="1000 sq.ft">1000</option>
               <option value="1200 sq.ft">1200</option>
             </select>
-
-            <select
-              class="
-                px-4
-                py-3
-                w-full
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-                text-sm
-              "
-            >
-              <option value="">Bedrooms</option>
-              <option value="1">1 bedroom</option>
-              <option value="2">2 bedrooms</option>
-              <option value="3">3 bedrooms</option>
-              <option value="4">4 bedrooms</option>
-              <option value="5">5 bedrooms</option>
-            </select>
-
-            <select
-              class="
-                px-4
-                py-3
-                w-full
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-                text-sm
-              "
-            >
-              <option value="">Bathrooms</option>
-              <option value="1">1 bathroom</option>
-              <option value="2">2 bathrooms</option>
-              <option value="3">3 bathrooms</option>
-              <option value="4">4 bathrooms</option>
-              <option value="5">5 bathrooms</option>
-            </select>
-
-            <select
-              class="
-                px-4
-                py-3
-                w-full
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-                text-sm
-              "
-            >
-              <option value="">Bathrooms</option>
-              <option value="1">1 space</option>
-              <option value="2">2 space</option>
-              <option value="3">3 space</option>
-            </select>
           </div>
+          <button
+            class="
+              float-right
+              px-4
+              py-2
+              bg-blue-300
+              hover:bg-blue-500
+              text-gray-800 text-sm
+              font-medium
+              rounded-md
+            "
+            @click="filter_database"
+          >
+            Apply filters
+          </button>
         </div>
       </div>
     </div>
@@ -450,11 +410,11 @@
                         text-green-800
                       "
                     >
-                      {{ order.status }}
+                      {{ capitalizeFirstLetter(order.status) }}
                     </span>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ order.country }}
+                    {{ capitalizeFirstLetter(order.country) }}
                   </td>
                   <td
                     class="
@@ -501,10 +461,15 @@ export default {
     return {
       name_to_search: null,
       showEditTracking: false,
+
+      country_to_filter: "",
+      status_to_filter: "",
+
       search: null,
       exists: false,
       not_found: false,
       orders_data: [],
+      full_orders_data: [],
       countries_filter: [],
       loading: false,
       edit: [],
@@ -512,6 +477,53 @@ export default {
     };
   },
   methods: {
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    },
+
+    reset_filters() {
+      this.country_to_filter = "";
+      this.status_to_filter = "";
+    },
+
+    async filter_database() {
+      var string_to_search = `/orders/?`;
+      var array_with_filters = [];
+
+      const filters = {
+        status: this.status_to_filter,
+        country: this.country_to_filter
+      };
+
+      for (const [key, value] of Object.entries(filters)) {
+        if (value != "") {
+          array_with_filters.push(key + "=" + value.toLowerCase());
+        }
+      }
+
+      if (this.name_to_search) {
+        array_with_filters.push(`search=${this.name_to_search}`);
+      }
+      var string_to_search = "orders/?" + array_with_filters.join("&");
+      if (string_to_search != "?") {
+        this.orders_data = null;
+        this.loading = true;
+        //Refresh token
+        await this.$store.dispatch("refreshToken");
+        //Set headers
+        let config = {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.accessToken}`
+          }
+        };
+        //Make the api call to filter
+        await axios.get(string_to_search, config).then((response) => {
+          this.orders_data = response.data;
+          this.loading = false;
+        });
+      }
+    },
+
     goToAdminOrder(order_id) {
       this.$router.push({ path: `/admin/order/${order_id}/` });
     },
@@ -535,11 +547,11 @@ export default {
 
       await axios.get(`/orders/`, config).then((response) => {
         this.orders_data = response.data;
+        this.full_orders_data = response.data;
         response.data.forEach((element) => {
           if (!this.countries_filter.includes(element.country)) {
             this.countries_filter.push(element.country);
           }
-          console.log(this.countries_filter);
         });
       });
       this.loading = false;

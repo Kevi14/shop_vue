@@ -321,9 +321,7 @@ export default {
       type_of_toaster: null,
       product: null,
       primary_image: null,
-      image_array: [
-        "https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg",
-      ],
+      image_array: [],
       //       seen: false,
       //       menu:false
     };

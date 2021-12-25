@@ -17,6 +17,7 @@
         <input
           v-model="search"
           class="
+            mt-20
             border-2 border-gray-300
             bg-white
             h-10
@@ -53,6 +54,35 @@
         </button>
       </div>
     </div>
+    <div>
+      <div class="bg-gray-100 lg:py-12 lg:flex lg:justify-center">
+        <div
+          class="
+            bg-white
+            lg:mx-8 lg:flex lg:max-w-5xl lg:shadow-lg lg:rounded-lg
+          "
+        >
+          <div class="lg:w-1/2">
+            <div
+              id="image_box"
+              class="h-64 bg-cover lg:rounded-lg lg:h-full"
+            ></div>
+          </div>
+          <div class="py-12 px-6 max-w-xl lg:max-w-5xl lg:w-1/2">
+            <h2 class="text-3xl text-gray-800 font-bold">
+              Use the above search bar to search for your awsome package.
+            </h2>
+            <p class="mt-4 text-gray-600">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem
+              modi reprehenderit vitae exercitationem aliquid dolores ullam
+              temporibus enim expedita aperiam mollitia iure consectetur dicta
+              tenetur, porro consequuntur saepe accusantium consequatur.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <main
       v-if="exists != false"
       class="max-w-2xl mx-auto pt-8 pb-24 sm:pt-16 sm:px-6 lg:max-w-7xl lg:px-8"
@@ -337,3 +367,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+#image_box {
+  background-image: url("../assets/1_wirf_01(1).jpg");
+}
+</style>

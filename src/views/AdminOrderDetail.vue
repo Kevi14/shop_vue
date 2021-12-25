@@ -54,13 +54,20 @@
                     <div>
                       <dt class="font-large text-gray-900">Delivery address</dt>
                       <dd class="mt-3 text-gray-500">
-                        <span class="block">Floyd Miles</span>
-                        <span class="block">7363 Cynthia Pass</span>
-                        <span class="block">Toronto, ON N3Y 4H8</span>
+                        <span class="block">
+                          <p class="inline text-black">Full Name :</p>
+                          {{ order_data[0].full_name }}</span
+                        >
+
+                        <span class="block">
+                          <p class="inline text-black">Country :</p>
+                          {{ order_data[0].country }}</span
+                        >
+                        <!-- 
                         <span class="block">
                           <p class="inline text-black">Test :</p>
                           {{ order_data[0] }}</span
-                        >
+                        > -->
                         <span class="block">
                           <p class="inline text-black">State :</p>
                           {{ order_data[0].state }}</span

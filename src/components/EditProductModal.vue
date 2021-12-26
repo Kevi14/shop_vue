@@ -481,16 +481,18 @@ export default {
   },
 
   mounted() {
+    const cloudinary_url =  'https://res.cloudinary.com/hayehilhw/' 
+
     axios.get(`/decks/${this.idToChange}/`).then((response) => {
       let data = response.data;
       this.title = data.title;
       this.description = data.description;
       this.price = data.price;
-      this.primaryPhotoUrl = data.get_image;
+      this.primaryPhotoUrl = cloudinary_url + data.image;
     });
     axios.get(`/images/?product_id=${this.idToChange}`).then((response) => {
       response.data.forEach((element) => {
-        this.imageArrayUrl.push(element.get_image);
+        this.imageArrayUrl.push(cloudinary_url+element.image);
         this.imageArray.push(element);
         // this.imageArray[index] =element
       });

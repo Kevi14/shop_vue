@@ -430,6 +430,7 @@ export default {
             style: "z-index: 7000;",
             queue: true,
           });
+          this.hideEditModalfunction();
           //   this.$router.push({ name: "Admin" });
         });
     },
@@ -481,7 +482,7 @@ export default {
   },
 
   mounted() {
-    const cloudinary_url =  'https://res.cloudinary.com/hayehilhw/' 
+    const cloudinary_url = "https://res.cloudinary.com/hayehilhw/";
 
     axios.get(`/decks/${this.idToChange}/`).then((response) => {
       let data = response.data;
@@ -492,7 +493,7 @@ export default {
     });
     axios.get(`/images/?product_id=${this.idToChange}`).then((response) => {
       response.data.forEach((element) => {
-        this.imageArrayUrl.push(cloudinary_url+element.image);
+        this.imageArrayUrl.push(cloudinary_url + element.image);
         this.imageArray.push(element);
         // this.imageArray[index] =element
       });

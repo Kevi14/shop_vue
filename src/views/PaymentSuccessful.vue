@@ -80,7 +80,6 @@ export default {
     //         id: this.$route.query.token,
     //       })
     //       .then(() => {
-    //         //   console.log(response.data.paypal_link)
     //         this.order_id = this.$route.query.token;
     //         // console.log(response);
     //       });

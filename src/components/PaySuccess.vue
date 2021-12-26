@@ -314,13 +314,13 @@ export default {
 
   methods: {
     setOrderStatusNumber(status_to_check) {
-      if (status_to_check === "Processing") {
+      if (status_to_check === "processing") {
         this.order_status_value = 1;
       }
-      if (status_to_check === "Shipped") {
+      if (status_to_check === "shipped") {
         this.order_status_value = 2;
       }
-      if (status_to_check === "Delivered") {
+      if (status_to_check === "delivered") {
         this.order_status_value = 4;
       }
     },
@@ -361,9 +361,7 @@ export default {
         id: this.$route.query.token,
       })
       .then(() => {
-        //   console.log(response.data.paypal_link)
-        this.order_id = this.$route.query.token;
-        // console.log(response);
+        this.order_id = this.$route.query.token
       });
 
     axios

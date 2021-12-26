@@ -358,13 +358,23 @@ export default {
     },
   },
   created() {
+    const cloudinary_url = "https://res.cloudinary.com/hayehilhw/";
     axios.get("/decks/" + this.$route.params.id + "/").then((response) => {
       // let data = JSON.parse(response.data);
       this.product = response.data;
       console.clear();
-      this.primary_image =
-        "https://res.cloudinary.com/hayehilhw/" + this.product.image;
+      this.primary_image = cloudinary_url + this.product.image;
     });
+    axios
+      .get(`/images/?product_id=${this.$route.params.id}`)
+      .then((response) => {
+        response.data.forEach((element) => {
+          // this.imageArrayUrl.push(cloudinary_url + element.image);
+          this.image_array.push(cloudinary_url + element.image);
+
+          // this.imageArray[index] =element
+        });
+      });
     // this.products();
     // this.cart = this.$store.getters.cartLength
   },

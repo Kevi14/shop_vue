@@ -11,6 +11,8 @@ import Order from "../views/Order.vue";
 import NotFound from "../views/NotFound.vue";
 import AdminOrderDetail from "../views/AdminOrderDetail.vue";
 import ProductDetailAdmin from "../views/ProductDetailAdmin.vue";
+import AddProduct from "../views/AddProduct.vue";
+
 const routes = [
   {
     path: "/",
@@ -63,6 +65,14 @@ const routes = [
     path: "/order/",
     name: "order",
     component: Order,
+  },
+  {
+    path: "/admin/add_product",
+    name: "add_prod",
+    component: AddProduct,
+    meta: {
+      requiresLogin: true,
+    },
   },
   {
     path: "/admin/order/:id",

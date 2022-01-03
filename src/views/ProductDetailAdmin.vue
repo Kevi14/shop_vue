@@ -117,9 +117,9 @@
             <h3 class="sr-only">Description</h3>
 
             <div class="text-base text-gray-700 space-y-6">
-              <p>
+              <pre style="white-space: pre-line">
                 {{ product.description }}
-              </p>
+              </pre>
             </div>
           </div>
           <button

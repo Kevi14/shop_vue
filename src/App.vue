@@ -1,16 +1,16 @@
 <template>
   <div id="nav">
-    <Navbar />
+    <NavbarTest />
   </div>
 </template>
 
 <script>
 // import HelloWorld from "@/components/HelloWorld.vue";
-import Navbar from "@/components/Navbar.vue";
+import NavbarTest from "@/components/NavbarTest.vue";
 export default {
   name: "Home",
   components: {
-    Navbar,
+    NavbarTest,
   },
 };
 </script>

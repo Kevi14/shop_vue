@@ -128,6 +128,9 @@ export default {
   data: function () {
     return {
       showDeleteModal: false,
+      toaster_message: null,
+      toaster_visibility: true,
+      type_of_toaster: null,
       //       seen: false,
       //       menu:false
     };

@@ -44,7 +44,7 @@ const administration = createStore({
   },
   getters: {
     loggedIn(state) {
-      return state.accessToken != null;
+      return state.refreshToken;
     },
     cartLength(state) {
       return state.cart.items.length;
@@ -64,6 +64,20 @@ const administration = createStore({
     },
   },
   actions: {
+    checkIfLoggedIn(context) {
+      if (context.getters.loggedIn != null) {
+        return context
+          .dispatch("refreshToken")
+          .then(() => {
+            return true;
+          })
+          .catch(() => {
+            return false;
+          });
+      } else {
+        return false;
+      }
+    },
     emptyCart(context) {
       context.state.cart.items = [];
     },
@@ -73,6 +87,7 @@ const administration = createStore({
       }
     },
     userLogin(context, usercredentials) {
+      // CHECK LATER
       return new Promise((resolve, reject) => {
         axios
           .post("/api-token/", {

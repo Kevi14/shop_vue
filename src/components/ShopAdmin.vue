@@ -9,29 +9,288 @@
       ></div>
     </div>
 
-    <div class="flex justify-center items-center">
-      <button
-        @click="toggleAddModalfunction"
-        class="
-          mt-20
-          px-6
-          py-2
-          font-medium
-          leading-7
-          text-center text-white
-          uppercase
-          transition
-          bg-blue-700
-          rounded-full
-          shadow
-          ripple
-          hover:shadow-lg hover:bg-blue-800
-          focus:outline-none
-        "
-        style=""
-      >
-        Add a product
-      </button>
+    <div class="">
+      <div class="flex items-center justify-center mt-6"></div>
+      <div v-if="loading" class="flex items-center justify-center pt-10">
+        <div
+          style="border-top-color: transparent"
+          class="
+            w-16
+            h-16
+            border-4 border-blue-400 border-solid
+            rounded-full
+            animate-spin
+          "
+        ></div>
+      </div>
+
+      <div class="flex flex-col pt-10">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div
+            class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+          >
+            <div
+              class="
+                shadow
+                overflow-hidden
+                border-b border-gray-200
+                sm:rounded-lg
+              "
+            >
+              <table
+                class="
+                  overflow-auto
+                  min-w-full
+                  divide-y divide-gray-200
+                  absolute
+                "
+              >
+                <thead class="bg-gray-50">
+                  <!-- <input
+                    class="absolute right-0"
+                    type="button"
+                    id="lockList"
+                    name="lockList"
+                    value="Lock WL"
+                  /> -->
+                  <a @click="goToProduct">
+                    <button
+                      class="
+                        bg-blue-500
+                        hover:bg-blue-700
+                        text-white
+                        font-bold
+                        py-2
+                        px-4
+                        rounded-full
+                        absolute
+                        right-0
+                      "
+                    >
+                      Add product
+                    </button>
+                  </a>
+                  <tr>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Title
+                    </th>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Category
+                    </th>
+
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Price
+                    </th>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      On sale
+                    </th>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Sale percentage
+                    </th>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Sale percentage
+                    </th>
+                    <!-- <td>asdadasd<input type="submit" /></td> -->
+
+                    <!-- <th
+                    scope="col"
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Tracking number
+                  </th>
+                  <th
+                    scope="col"
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    country
+                  </th> -->
+
+                    <th scope="col" class="relative px-6 py-3">
+                      <span class="sr-only">Edit</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr v-for="product in products" :key="product.id">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="flex-shrink-0 h-20 w-20">
+                          <img
+                            class="h-20 w-20"
+                            v-bind:src="
+                              'https://res.cloudinary.com/hayehilhw/' +
+                              product.image
+                            "
+                            alt=""
+                          />
+                        </div>
+                        <div class="ml-4">
+                          <div class="text-sm font-medium text-gray-900">
+                            {{ product.title }}
+                          </div>
+                          <div class="text-sm text-gray-500">
+                            <!-- {{ product.contact_email }} -->
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text text-gray-900">
+                        {{ product.category }}
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text text-gray-900">
+                        {{ product.price }}
+                      </div>
+                    </td>
+
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                        class="
+                          px-2
+                          inline-flex
+                          text
+                          leading-5
+                          font-semibold
+                          rounded-full
+                          bg-green-100
+                          text-green-800
+                        "
+                      >
+                        {{ product.on_sale }}
+                      </span>
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                    >
+                      {{ product.sale_percentage }}
+                    </td>
+                    <td
+                      class="
+                        px-6
+                        py-4
+                        whitespace-nowrap
+                        text-right text-sm
+                        font-medium
+                        cursor-pointer
+                      "
+                    >
+                      <a
+                        @click="goToAdminOrder(order.order_id)"
+                        class="text-indigo-600 hover:text-indigo-900"
+                        >Edit</a
+                      >
+                    </td>
+                  </tr>
+
+                  <!-- More people... -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <EditTrackingNumber
+        v-if="showEditTracking"
+        @toggle-modal="toggle_show_tracking"
+      />
     </div>
 
     <div
@@ -78,7 +337,9 @@
             "
           >
             <img
-              v-bind:src="'https://res.cloudinary.com/hayehilhw/' + deck.image"
+              v-bind:src="
+                'https://res.cloudinary.com/hayehilhw/' + product.image
+              "
               alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
               class="
                 w-full
@@ -144,7 +405,7 @@ export default {
       type_of_toaster: null,
       title: null,
       description: null,
-      decks: [],
+      products: [],
       cart: null,
       showDeleteModal: false,
       showAddModal: false,
@@ -161,11 +422,11 @@ export default {
     toggleToast() {
       this.toaster_visibility = !this.toaster_visibility;
     },
-    async products() {
+    async get_products() {
       this.$store.commit("setIsLoading", true);
       await axios.get("/decks/").then((response) => {
         // let data = JSON.parse(response.data);
-        this.decks = response.data;
+        this.products = response.data;
       });
       this.$store.commit("setIsLoading", false);
     },
@@ -194,7 +455,9 @@ export default {
     toggleAddModalfunction() {
       this.showAddModal = !this.showAddModal;
     },
-
+    goToAddProduct() {
+      this.$router.push({ path: `/admin/add_product/` });
+    },
     hideDeleteModalfunction() {
       this.showDeleteModal = !this.showDeleteModal;
       this.idToChange = null;
@@ -206,7 +469,7 @@ export default {
   },
 
   mounted() {
-    this.products();
+    this.get_products();
   },
 };
 </script>

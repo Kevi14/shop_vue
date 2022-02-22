@@ -139,6 +139,19 @@
                   to="/order"
                   >Order</router-link
                 >
+                <router-link
+                  class="
+                    text-gray-300
+                    hover:bg-gray-700 hover:text-white
+                    px-3
+                    py-2
+                    rounded-md
+                    text-sm
+                    font-medium
+                  "
+                  to="/checkout"
+                  >Cart</router-link
+                >
               </div>
             </div>
           </div>
@@ -437,6 +450,21 @@
             to="/order"
             >Order</router-link
           >
+          <router-link
+            class="
+              text-gray-300
+              hover:text-white
+              block
+              px-3
+              py-2
+              rounded-md
+              text-base
+              font-medium
+            "
+            aria-current="page"
+            to="/checkout"
+            >Cart</router-link
+          >
 
           <!-- <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
 
@@ -482,7 +510,7 @@
 }
 </style>
 
-<script>
+<script type="application/javascript">
 // import TailwindDropdownVue from 'tailwind-dropdown-vue'
 import { computed } from "vue";
 // import { mapState } from "vuex";

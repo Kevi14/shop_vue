@@ -449,28 +449,22 @@ export default {
         formData.append("image", this.primaryPhoto);
       }
       // console.log(this.primaryPhoto)
-      await this.$store.dispatch("refreshToken");
-
       let config = {
         headers: {
           Authorization: `Bearer ${this.$store.state.accessToken}`,
         },
       };
-
-      await axios.post(`/decks/`, formData, config).then((response) => {
-        this.addImages(response.data.id);
-        this.$toast.show(`Changes made successfully`, {
-          type: "success",
-          position: "top",
-          duration: 2000,
-          useDefaultCss: false,
-          class:
-            "bg-green-500 border-green-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
-          style: "z-index: 7000;",
-          queue: true,
+      await axios
+        .get("/categories/", config)
+        .then((response) => {
+          this.decks = response.data;
+        })
+        .catch(async (error) => {
+          if (error.response.code == 401) {
+            await this.$store.dispatch("refreshToken");
+            this.addProduct();
+          }
         });
-        this.hideModalfunction();
-      });
     },
   },
 };

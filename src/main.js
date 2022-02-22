@@ -11,11 +11,18 @@ axios.defaults.baseURL = process.env.VUE_APP_AXIOS_BASE_URL;
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresLogin)) {
-    if (!administration.getters.loggedIn) {
-      next({ name: "AdminLogin" });
-    } else {
-      next();
-    }
+    administration
+      .dispatch("checkIfLoggedIn")
+      .then(function (result) {
+        if (result == true) {
+          next();
+        } else {
+          next({ name: "AdminLogin" });
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   } else {
     next();
   }

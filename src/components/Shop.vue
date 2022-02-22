@@ -919,8 +919,10 @@
                     border-b border-gray-200
                   "
                 >
-                  <li>
-                    <a href="#"> Totes </a>
+                  <li v-for="category in categories" :key="category">
+                    <a @click="add_category_filter(category)">
+                      {{ category }}
+                    </a>
                   </li>
                 </ul>
 
@@ -1606,63 +1608,57 @@ export default {
       decks: [],
       cart: null,
       show_sort: false,
+      price_ordering: null,
       array_with_filters: [],
+      categories: [],
+      category_to_filter: null,
       //       seen: false,
       //       menu:false
     };
   },
+  watch: {
+    price_ordering: function () {
+      this.filter_database();
+    },
+    category_to_filter: function () {
+      this.filter_database();
+    },
+  },
   methods: {
+    async get_categories() {
+      await axios.get("/categories/").then((response) => {
+        response.data.forEach((element) => {
+          this.categories.push(element.category);
+        });
+      });
+    },
     descending_bold() {
-      if (this.array_with_filters.includes("ordering=price")) {
+      if (this.price_ordering === "ordering=price") {
         return true;
       } else {
         false;
       }
     },
     async filter_database() {
-      var filter_string = "/decks/?" + this.array_with_filters.join("&");
+      var array_with_filters = [this.price_ordering, this.category_to_filter];
+      //Remove nulls from array
+      array_with_filters = array_with_filters.filter((n) => n);
+      var filter_string = "/decks/?" + array_with_filters.join("&");
       await axios.get(filter_string).then((response) => {
         // let data = JSON.parse(response.data);
         this.decks = response.data;
       });
     },
     add_filter_price_descending() {
-      console.log(this.array_with_filters);
-      var index = this.array_with_filters.indexOf("ordering=price");
-      if (this.array_with_filters.includes("ordering=-price")) {
-        return;
-      }
-      if (index !== -1) {
-        this.array_with_filters[index] = "ordering=-price";
-      } else {
-        this.array_with_filters.push("ordering=-price");
-      }
-
-      return this.filter_database();
-      // var index = this.array_with_filters.indexOf("ordering=-price");
-
-      // if (index !== -1) {
-      //   this.array_with_filters[index] = "ordering=price";
-      //   console.log("- price exists")
-      // } else if (index1 == -1) {
-      //   this.array_with_filters.push("ordering=price");
-      // }
-      // console.log(this.array_with_filters);
+      this.price_ordering = "ordering=-price";
       // this.filter_database();
     },
     add_filter_price_accending() {
-      var index = this.array_with_filters.indexOf("ordering=-price");
-
-      if (this.array_with_filters.includes("ordering=price")) {
-        return;
-      }
-      if (index !== -1) {
-        this.array_with_filters[index] = "ordering=price";
-      } else {
-        this.array_with_filters.push("ordering=price");
-      }
-
-      return this.filter_database();
+      this.price_ordering = "ordering=price";
+      // this.filter_database();
+    },
+    add_category_filter(categ) {
+      this.category = this.category_to_filter = categ;
     },
     toggle_sort() {
       this.show_sort = !this.show_sort;
@@ -1709,8 +1705,10 @@ export default {
     },
   },
   mounted() {
+    this.get_categories();
     this.products();
-    console.log(this.decks);
+
+    // console.log(this.decks);
   },
 };
 </script>

@@ -153,21 +153,25 @@
                   "
                   >Number of cards</label
                 >
-                <input
+                <select
                   class="
-                    py-2
-                    px-3
-                    rounded-lg
-                    border-2 border-purple-300
-                    mt-1
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-purple-600
-                    focus:border-transparent
+                    px-4
+                    py-3
+                    w-full
+                    rounded-md
+                    bg-gray-100
+                    border-transparent
+                    focus:border-gray-500 focus:bg-white focus:ring-0
+                    text-sm
                   "
-                  type="text"
-                  placeholder="Another Input"
-                />
+                  v-model="category"
+                >
+                  <option selected="selected" value="">Category</option>
+                  <option v-for="ctg in categories" :value="ctg" :key="ctg">
+                    <!-- {{ capitalizeFirstLetter(countrie) }} -->
+                    {{ ctg }}
+                  </option>
+                </select>
               </div>
               <div
                 class="
@@ -401,11 +405,29 @@ export default {
       primaryPhoto: null,
       primaryPhotoUrl: null,
       showEditModal: false,
+      category: "",
+      categories: [],
+      d: "",
       //       seen: false,
       //       menu:false
     };
   },
   methods: {
+    ctg_id(ctg) {
+      this.$store.dispatch("refreshToken");
+
+      let config = {
+        headers: {
+          Authorization: `Bearer ${this.$store.state.accessToken}`,
+        },
+      };
+      return axios
+        .get(`/categories/?category=${ctg}`, config)
+        .then((response) => {
+          return JSON.stringify(response.data[0]);
+          // console.log(data);
+        });
+    },
     hideModalfunction() {
       this.$emit("toggle-modal");
     },
@@ -439,18 +461,23 @@ export default {
           "Content-Type": "multipart/form-data",
         },
       };
-      axios.post(`/images/`, formData, config);
+      axios.post(`/images/`, formData, config).catch((error) => {
+        console.log(error);
+      });
     },
     async addProduct() {
+      console.log(this.ctg_id(this.category));
       const formData = new FormData();
       formData.append("title", this.title);
       formData.append("description", this.description);
       formData.append("price", this.price);
+      // formData.append("category_id", this.ctg_id(this.category));
+      formData.append("category", this.category);
+
       if (this.primaryPhoto != null) {
         formData.append("image", this.primaryPhoto);
       }
       // console.log(this.primaryPhoto)
-      await this.$store.dispatch("refreshToken");
 
       let config = {
         headers: {
@@ -458,21 +485,48 @@ export default {
         },
       };
 
-      await axios.post(`/decks/`, formData, config).then((response) => {
-        this.addImages(response.data.id);
-        this.$toast.show(`Changes made successfully`, {
-          type: "success",
-          position: "top",
-          duration: 2000,
-          useDefaultCss: false,
-          class:
-            "bg-green-500 border-green-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
-          style: "z-index: 7000;",
-          queue: true,
+      await axios
+        .post(`/decks/`, formData, config)
+        .then((response) => {
+          this.addImages(response.data.id);
+          this.$toast.show(`Changes made successfully`, {
+            type: "success",
+            position: "top",
+            duration: 2000,
+            useDefaultCss: false,
+            class:
+              "bg-green-500 border-green-700 py-2 px-3 shadow-md text-white text-2xl rounded-lg mt-10",
+            style: "z-index: 7000;",
+            queue: true,
+          });
+        })
+        .catch(async (error) => {
+          if (error.response.code == 401) {
+            await this.$store.dispatch("refreshToken");
+            this.addProduct();
+          }
         });
-        this.hideModalfunction();
+    },
+
+    async getCategories() {
+      await this.$store.dispatch("refreshToken");
+      let config = {
+        headers: {
+          Authorization: `Bearer ${this.$store.state.accessToken}`,
+        },
+      };
+      await axios.get("/categories/", config).then((response) => {
+        let data = response.data;
+        data.forEach((element) => {
+          if (!this.categories.includes(element.category)) {
+            this.categories.push(element.category);
+          }
+        });
       });
     },
+  },
+  mounted() {
+    this.getCategories();
   },
 };
 </script>
